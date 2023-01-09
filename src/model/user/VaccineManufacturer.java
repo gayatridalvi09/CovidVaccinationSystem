@@ -1,0 +1,34 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package model.user;
+
+import java.util.List;
+import model.vaccine.Vaccine;
+
+/**
+ *
+ * @author gayat
+ */
+public class VaccineManufacturer extends User {
+    private List<Vaccine> vaccines;
+
+    public VaccineManufacturer(List<Vaccine> vaccines, String username, 
+            String password, String name, Role role) {
+        super(username, password, name, role);
+        this.vaccines = vaccines;
+    }
+
+    public List<Vaccine> getVaccines() {
+        return vaccines;
+    }
+
+    public void setVaccines(List<Vaccine> vaccines) {
+        this.vaccines = vaccines;
+    }
+    
+    public void addVaccine(Vaccine vaccine) {
+        this.vaccines.add(vaccine);
+    }
+}

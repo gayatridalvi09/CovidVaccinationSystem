@@ -6,6 +6,7 @@ package UI;
 
 import model.vaccinationsystem.CovidVaccinationSystem;
 
+
 /**
  *
  * @author gayat
@@ -37,8 +38,8 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         usernameText = new javax.swing.JTextField();
-        passwordText = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        passwordText = new javax.swing.JPasswordField();
         loginBtnPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
@@ -79,11 +80,12 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameText, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton2)
-                                .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernameText)
+                            .addGroup(workAreaPanelLayout.createSequentialGroup()
+                                .addGap(91, 91, 91)
+                                .addComponent(jButton2))
+                            .addComponent(passwordText)))
                     .addGroup(workAreaPanelLayout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jLabel1))
@@ -105,11 +107,11 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(workAreaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(passwordText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(52, 52, 52)
+                .addGap(50, 50, 50)
                 .addComponent(jButton2)
                 .addGap(51, 51, 51)
                 .addComponent(jLabel1)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jSplitPane1.setRightComponent(workAreaPanel);
@@ -169,7 +171,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String username = usernameText.getText();
-        String password = passwordText.getText();
+        String password = String.valueOf(passwordText.getPassword());
         
         if (username.equals("sys") && password.equals("sys")) {
             SystemAdminPanel systemAdminPanel = new SystemAdminPanel(jSplitPane1, covidVaccinationSystem);
@@ -221,7 +223,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JPanel loginBtnPanel;
-    private javax.swing.JTextField passwordText;
+    private javax.swing.JPasswordField passwordText;
     private javax.swing.JTextField usernameText;
     private javax.swing.JPanel workAreaPanel;
     // End of variables declaration//GEN-END:variables

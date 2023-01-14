@@ -4,17 +4,24 @@
  */
 package UI;
 
+import javax.swing.JSplitPane;
+import model.vaccinationsystem.CovidVaccinationSystem;
+
 /**
  *
  * @author gayat
  */
 public class VaccineManufacturerPanel extends javax.swing.JPanel {
 
+    private javax.swing.JSplitPane splitPane;
+    private CovidVaccinationSystem covidVaccinationSystem;
     /**
      * Creates new form VaccineManufacturer
      */
-    public VaccineManufacturerPanel() {
+    public VaccineManufacturerPanel(JSplitPane splitPane,CovidVaccinationSystem covidVaccinationSystem) {
         initComponents();
+        this.splitPane = splitPane;
+        this.covidVaccinationSystem = covidVaccinationSystem;
     }
 
     /**

@@ -4,6 +4,8 @@
  */
 package UI;
 
+import model.user.MedicalCenter;
+import model.user.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
 
 
@@ -166,6 +168,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        jSplitPane1.setRightComponent(workAreaPanel);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -176,9 +179,37 @@ public class MainJFrame extends javax.swing.JFrame {
         if (username.equals("sys") && password.equals("sys")) {
             SystemAdminPanel systemAdminPanel = new SystemAdminPanel(jSplitPane1, covidVaccinationSystem);
             jSplitPane1.setRightComponent(systemAdminPanel);
+        } else {
+            checkLogins(username, password);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    
+    private void checkLogins(String username, String password) {
+        // Login for VaccineManufacturer
+        for (VaccineManufacturer vaccineManufacturer: covidVaccinationSystem.getVaccineManufacturers()) {
+            if (vaccineManufacturer.getUsername().equals(username) 
+                    && vaccineManufacturer.getPassword().equals(password)) {
+                VaccineManufacturerPanel vaccineManufacturerPanel = new VaccineManufacturerPanel(
+                        jSplitPane1, covidVaccinationSystem);
+                jSplitPane1.setRightComponent(vaccineManufacturerPanel);
+            }
+        }
+        // Login for Medical Center
+        for (MedicalCenter medicalCenter: covidVaccinationSystem.getMedicalCenters()) {
+            if (medicalCenter.getUsername().equals(username) 
+                    && medicalCenter.getPassword().equals(password)) {
+                MedicalCenterPanel medicalCenterPanel = new MedicalCenterPanel(
+                        jSplitPane1, covidVaccinationSystem);
+                jSplitPane1.setRightComponent(medicalCenterPanel);
+            }
+        }
+
+       
+        
+        // for (CovidCharity covidCha)
+    }
+    
     /**
      * @param args the command line arguments
      */

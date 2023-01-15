@@ -4,6 +4,7 @@
  */
 package UI;
 
+import model.user.CovidCharity;
 import model.user.MedicalCenter;
 import model.user.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
@@ -205,9 +206,17 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         }
 
-       
+       // Login for Covid Charity
+        for (CovidCharity covidCharity: covidVaccinationSystem.getCovidCharities()) {
+            if (covidCharity.getUsername().equals(username) 
+                    && covidCharity.getPassword().equals(password)) {
+                CovidCharityPanel covidCharityPanel = new CovidCharityPanel(
+                        jSplitPane1, covidVaccinationSystem);
+                jSplitPane1.setRightComponent(covidCharityPanel);
+            }
+        }
+
         
-        // for (CovidCharity covidCha)
     }
     
     /**

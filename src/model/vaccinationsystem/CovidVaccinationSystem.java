@@ -6,6 +6,7 @@ package model.vaccinationsystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.user.Community;
 import model.user.CovidCharity;
 import model.user.MedicalCenter;
 import model.user.VaccineManufacturer;
@@ -18,6 +19,8 @@ public class CovidVaccinationSystem {
     private List<VaccineManufacturer> vaccineManufacturers;    
     private List<MedicalCenter> medicalCenters;
     private List<CovidCharity> covidCharities;
+    private List<Community> community;
+
 
 
     
@@ -25,6 +28,7 @@ public class CovidVaccinationSystem {
         this.vaccineManufacturers = new ArrayList<>();
         this.medicalCenters = new ArrayList<>();
         this.covidCharities = new ArrayList<>();
+        this.community = new ArrayList<>();
 
     }
 
@@ -60,6 +64,16 @@ public class CovidVaccinationSystem {
     }
     public void addCovidCharity(CovidCharity covidCharity) {
         this.covidCharities.add(covidCharity);
+    }
+    public List<Community> getCommunity() {
+        return community;
+    }
+
+    public void setCommunity(List<Community> community) {
+        this.community = community;
+    }
+    public void addCommunity(Community community) {
+        this.community.add(community);
     }
 
 

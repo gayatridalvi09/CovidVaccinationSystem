@@ -5,29 +5,30 @@
 package model.user;
 
 import java.util.List;
+import model.covidcharity.Covidcharity;
 
 /**
  *
  * @author gayat
  */
 public class CovidCharity extends User{
-    private List<CovidCharity> covidcharities;
+    private List<Covidcharity> covidcharities;
 
-    public CovidCharity(List<CovidCharity> covidcharities, String username, String password, String name, Role role) {
+    public CovidCharity(List<Covidcharity> covidcharities, String username, String password, String name, Role role) {
         super(username, password, name, role);
         this.covidcharities = covidcharities;
     }
 
 
-    public List<CovidCharity> getCovidcharities() {
+    public List<Covidcharity> getCovidcharities() {
         return covidcharities;
     }
 
-    public void setCovidcharities(List<CovidCharity> covidcharities) {
+    public void setCovidcharities(List<Covidcharity> covidcharities) {
         this.covidcharities = covidcharities;
     }
 
-        public void addCovidCharity(CovidCharity covidCharity) {
+        public void addCovidCharity(Covidcharity covidCharity) {
         this.covidcharities.add(covidCharity);
     }
 

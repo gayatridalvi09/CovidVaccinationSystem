@@ -204,10 +204,9 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this,"Please select a valid role");
         }
         
-        VaccineManufacturer vaccineManufactuerer = new VaccineManufacturer(
-                new ArrayList<>(), username, password, companyName, Role.VACCINE_MANUFACTURER);
+        VaccineManufacturer vaccineManufactuerer = new VaccineManufacturer(username, password, companyName, Role.VACCINE_MANUFACTURER);
         
-        covidVaccinationSystem.addVaccineManufacturer(vaccineManufactuerer);
+        covidVaccinationSystem.getVaccineManufacturerDirectory().addVaccineManufacturer(vaccineManufactuerer);
         
         populateTable();
         
@@ -242,7 +241,7 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         VaccineManufacturer vaccineManufacturer = (VaccineManufacturer) model.getValueAt(selectedRowIndex, 0);
         
-        covidVaccinationSystem.getVaccineManufacturers().remove(vaccineManufacturer);
+        covidVaccinationSystem.getVaccineManufacturerDirectory().getVaccineManufacturers().remove(vaccineManufacturer);
         
         populateTable();
         
@@ -288,7 +287,7 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        for (VaccineManufacturer vm : this.covidVaccinationSystem.getVaccineManufacturers()) {
+        for (VaccineManufacturer vm : this.covidVaccinationSystem.getVaccineManufacturerDirectory().getVaccineManufacturers()) {
             Object[] row = new Object[3];
             row[0] = vm;                     
             row[1] = vm.getName();

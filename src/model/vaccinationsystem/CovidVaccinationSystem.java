@@ -6,75 +6,65 @@ package model.vaccinationsystem;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.user.Community;
+import model.user.CommunityAdmin;
+import model.user.CommunityAdminDirectory;
 import model.user.CovidCharity;
+import model.user.CovidCharityDirectory;
 import model.user.MedicalCenter;
+import model.user.MedicalCenterDirectory;
 import model.user.VaccineManufacturer;
+import model.user.VaccineManufacturerDirectory;
 
 /**
  *
  * @author gayat
  */
 public class CovidVaccinationSystem {
-    private List<VaccineManufacturer> vaccineManufacturers;    
-    private List<MedicalCenter> medicalCenters;
-    private List<CovidCharity> covidCharities;
-    private List<Community> community;
+    private VaccineManufacturerDirectory vaccineManufacturerDirectory;    
+    private MedicalCenterDirectory medicalCenterDirectory;
+    private CovidCharityDirectory covidCharityDirectory;
+    private CommunityAdminDirectory communityDirectory;
 
 
 
     
     public CovidVaccinationSystem() {
-        this.vaccineManufacturers = new ArrayList<>();
-        this.medicalCenters = new ArrayList<>();
-        this.covidCharities = new ArrayList<>();
-        this.community = new ArrayList<>();
+        this.vaccineManufacturerDirectory = new VaccineManufacturerDirectory(new ArrayList<>());
+        this.medicalCenterDirectory = new MedicalCenterDirectory(new ArrayList<>());
+        this.covidCharityDirectory = new CovidCharityDirectory(new ArrayList<>());
+        this.communityDirectory = new CommunityAdminDirectory(new ArrayList<>());
 
     }
 
-    public List<VaccineManufacturer> getVaccineManufacturers() {
-        return vaccineManufacturers;
+    public VaccineManufacturerDirectory getVaccineManufacturerDirectory() {
+        return vaccineManufacturerDirectory;
     }
 
-    public void setVaccineManufacturers(List<VaccineManufacturer> vaccineManufacturers) {
-        this.vaccineManufacturers = vaccineManufacturers;
+    public void setVaccineManufacturerDirectory(VaccineManufacturerDirectory vaccineManufacturerDirectory) {
+        this.vaccineManufacturerDirectory = vaccineManufacturerDirectory;
     }
     
-    public void addVaccineManufacturer(VaccineManufacturer vaccineManufacturer) {
-        this.vaccineManufacturers.add(vaccineManufacturer);
-    }
-        public List<MedicalCenter> getMedicalCenters() {
-        return medicalCenters;
+    public MedicalCenterDirectory getMedicalCenterDirectory() {
+        return medicalCenterDirectory;
     }
 
-    public void setMedicalCenters(List<MedicalCenter> medicalCenters) {
-        this.medicalCenters = medicalCenters;
+    public void setMedicalCenterDirectory(MedicalCenterDirectory medicalCenterDirectory) {
+        this.medicalCenterDirectory = medicalCenterDirectory;
     }
 
-
-    public void addMedicalCenter(MedicalCenter medicalCenter) {
-        this.medicalCenters.add(medicalCenter);
-    }   
-    public List<CovidCharity> getCovidCharities() {
-        return covidCharities;
+    public CovidCharityDirectory getCovidCharityDirectory() {
+        return covidCharityDirectory;
     }
 
-    public void setCovidCharities(List<CovidCharity> covidCharities) {
-        this.covidCharities = covidCharities;
+    public void setCovidCharityDirectory(CovidCharityDirectory covidCharityDirectory) {
+        this.covidCharityDirectory = covidCharityDirectory;
     }
-    public void addCovidCharity(CovidCharity covidCharity) {
-        this.covidCharities.add(covidCharity);
-    }
-    public List<Community> getCommunity() {
-        return community;
+    
+    public CommunityAdminDirectory getCommunityDirectory() {
+        return communityDirectory;
     }
 
-    public void setCommunity(List<Community> community) {
-        this.community = community;
+    public void setCommunityDirectory(CommunityAdminDirectory communityDirectory) {
+        this.communityDirectory = communityDirectory;
     }
-    public void addCommunity(Community community) {
-        this.community.add(community);
-    }
-
-
 }

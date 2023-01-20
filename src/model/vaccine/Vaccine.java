@@ -43,5 +43,9 @@ public class Vaccine {
         this.disbursementCity = disbursementCity;
     }
     
+    @Override
+    public String toString() {
+        return brand;
+    }
     
 }

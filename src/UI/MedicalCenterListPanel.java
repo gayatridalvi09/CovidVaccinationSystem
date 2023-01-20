@@ -205,10 +205,9 @@ public class MedicalCenterListPanel extends javax.swing.JPanel {
         String hospitalName = jTextField4.getText();
         String role = jComboBox1.getSelectedItem().toString();
         System.out.println(role);
-        MedicalCenter medicalCenter = new MedicalCenter(
-                new ArrayList<>(), username, password, hospitalName, Role.MEDICAL_CENTER_ADMIN); // TODO Role
+        MedicalCenter medicalCenter = new MedicalCenter(username, password, hospitalName, Role.MEDICAL_CENTER_ADMIN); // TODO Role
         
-        covidVaccinationSystem.addMedicalCenter(medicalCenter);
+        covidVaccinationSystem.getMedicalCenterDirectory().addMedicalCenter(medicalCenter);
         
         populateTable();
         
@@ -243,7 +242,7 @@ public class MedicalCenterListPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         MedicalCenter medicalCenter = (MedicalCenter) model.getValueAt(selectedRowIndex, 0);
         
-        covidVaccinationSystem.getMedicalCenters().remove(medicalCenter);
+        covidVaccinationSystem.getMedicalCenterDirectory().getMedicalCenters().remove(medicalCenter);
         
         populateTable();
 
@@ -290,7 +289,7 @@ public class MedicalCenterListPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        for (MedicalCenter vm : this.covidVaccinationSystem.getMedicalCenters()) {
+        for (MedicalCenter vm : this.covidVaccinationSystem.getMedicalCenterDirectory().getMedicalCenters()) {
             Object[] row = new Object[3];
             row[0] = vm;                     
             row[1] = vm.getName();

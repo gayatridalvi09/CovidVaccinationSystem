@@ -188,26 +188,27 @@ public class MainJFrame extends javax.swing.JFrame {
     
     private void checkLogins(String username, String password) {
         // Login for VaccineManufacturer
-        for (VaccineManufacturer vaccineManufacturer: covidVaccinationSystem.getVaccineManufacturers()) {
+        for (VaccineManufacturer vaccineManufacturer: covidVaccinationSystem
+                .getVaccineManufacturerDirectory().getVaccineManufacturers()) {
             if (vaccineManufacturer.getUsername().equals(username) 
                     && vaccineManufacturer.getPassword().equals(password)) {
-                VaccineManufacturerPanel vaccineManufacturerPanel = new VaccineManufacturerPanel(
-                        jSplitPane1, covidVaccinationSystem);
-                jSplitPane1.setRightComponent(vaccineManufacturerPanel);
+                VaccinesPanel vaccinesPanel = new VaccinesPanel(
+                        jSplitPane1, covidVaccinationSystem, vaccineManufacturer);
+                jSplitPane1.setRightComponent(vaccinesPanel);
             }
         }
         // Login for Medical Center
-        for (MedicalCenter medicalCenter: covidVaccinationSystem.getMedicalCenters()) {
+        for (MedicalCenter medicalCenter: covidVaccinationSystem.getMedicalCenterDirectory().getMedicalCenters()) {
             if (medicalCenter.getUsername().equals(username) 
                     && medicalCenter.getPassword().equals(password)) {
-                MedicalCenterPanel medicalCenterPanel = new MedicalCenterPanel(
-                        jSplitPane1, covidVaccinationSystem);
-                jSplitPane1.setRightComponent(medicalCenterPanel);
+                MedicalCenterEmployeesPanel medicalCenterEmployeesPanel = new MedicalCenterEmployeesPanel(
+                        jSplitPane1, covidVaccinationSystem, medicalCenter);
+                jSplitPane1.setRightComponent(medicalCenterEmployeesPanel);
             }
         }
 
        // Login for Covid Charity
-        for (CovidCharity covidCharity: covidVaccinationSystem.getCovidCharities()) {
+        for (CovidCharity covidCharity: covidVaccinationSystem.getCovidCharityDirectory().getCovidCharities()) {
             if (covidCharity.getUsername().equals(username) 
                     && covidCharity.getPassword().equals(password)) {
                 CovidCharityPanel covidCharityPanel = new CovidCharityPanel(

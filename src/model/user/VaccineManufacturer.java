@@ -4,6 +4,7 @@
  */
 package model.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.vaccine.Vaccine;
 
@@ -12,23 +13,22 @@ import model.vaccine.Vaccine;
  * @author gayat
  */
 public class VaccineManufacturer extends User {
-    private List<Vaccine> vaccines;
+    private VaccineDirectory vaccineDirectory;
 
-    public VaccineManufacturer(List<Vaccine> vaccines, String username, 
+    public VaccineManufacturer(String username, 
             String password, String name, Role role) {
         super(username, password, name, role);
-        this.vaccines = vaccines;
+        this.vaccineDirectory = new VaccineDirectory(new ArrayList<>());
     }
 
-    public List<Vaccine> getVaccines() {
-        return vaccines;
+    public VaccineDirectory getVaccineDirectory() {
+        return vaccineDirectory;
     }
 
-    public void setVaccines(List<Vaccine> vaccines) {
-        this.vaccines = vaccines;
+    public void setVaccineDirectory(VaccineDirectory vaccineDirectory) {
+        this.vaccineDirectory = vaccineDirectory;
     }
+
     
-    public void addVaccine(Vaccine vaccine) {
-        this.vaccines.add(vaccine);
-    }
+    
 }

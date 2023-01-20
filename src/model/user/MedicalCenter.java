@@ -4,30 +4,29 @@
  */
 package model.user;
 
+import java.util.ArrayList;
 import java.util.List;
-import model.medical.Medical;
 
 /**
  *
  * @author gayat
  */
 public class MedicalCenter extends User{
-        private List<Medical> medicalCenter;
+    private EmployeeDirectory employeeDirectory;
 
-    public MedicalCenter(List<Medical> medicalCenter, String username, String password, String name, Role role) {
+    public MedicalCenter(String username, String password, String name, Role role) {
         super(username, password, name, role);
-        this.medicalCenter = medicalCenter;
+        this.employeeDirectory = new EmployeeDirectory(new ArrayList<>());
+        
+    } 
+
+    public EmployeeDirectory getEmployeeDirectory() {
+        return employeeDirectory;
     }
 
-    public List<Medical> getMedicalCenter() {
-        return medicalCenter;
+    public void setEmployeeDirectory(EmployeeDirectory employeeDirectory) {
+        this.employeeDirectory = employeeDirectory;
     }
-
-    public void setMedicalCenter(List<Medical> medicalCenter) {
-        this.medicalCenter = medicalCenter;
-    }
-
-    
     
     
     

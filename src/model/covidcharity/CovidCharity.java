@@ -8,13 +8,13 @@ package model.covidcharity;
  *
  * @author gayat
  */
-public class CovidCharity {
+public class Covidcharity {
     private String NGO_name;
     private String Address;
     private String Employee;
     private String City;
 
-    public CovidCharity(String NGO_name, String Address, String Employee, String City) {
+    public Covidcharity(String NGO_name, String Address, String Employee, String City) {
         this.NGO_name = NGO_name;
         this.Address = Address;
         this.Employee = Employee;

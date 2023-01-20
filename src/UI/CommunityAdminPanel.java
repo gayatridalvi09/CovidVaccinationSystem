@@ -7,7 +7,7 @@ package UI;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.user.Community;
+import model.user.CommunityAdmin;
 import model.user.Role;
 import model.vaccinationsystem.CovidVaccinationSystem;
 
@@ -203,9 +203,9 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Community medicalCenter = (Community) model.getValueAt(selectedRowIndex, 0);
+        CommunityAdmin medicalCenter = (CommunityAdmin) model.getValueAt(selectedRowIndex, 0);
 
-        covidVaccinationSystem.getMedicalCenters().remove(medicalCenter);
+        covidVaccinationSystem.getMedicalCenterDirectory().getMedicalCenters().remove(medicalCenter);
 
         populateTable();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -218,7 +218,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Community community = (Community) model.getValueAt(selectedRowIndex, 0);
+        CommunityAdmin community = (CommunityAdmin) model.getValueAt(selectedRowIndex, 0);
         jTextField1.setText(community.getUsername());
         jTextField2.setText(community.getPassword());
         jTextField4.setText(community.getName());
@@ -232,9 +232,8 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
         String hospitalName = jTextField4.getText();
         String role = jComboBox1.getSelectedItem().toString();
         System.out.println(role);
-            Community community = new Community(
-                new ArrayList<>(), username, password, hospitalName, Role.COMMUNITY_ADMIN); // TODO Role
-            covidVaccinationSystem.addCommunity(community);
+            CommunityAdmin community = new CommunityAdmin(username, password, hospitalName, Role.COMMUNITY_ADMIN); // TODO Role
+            covidVaccinationSystem.getCommunityDirectory().addCommunity(community);
 
         populateTable();
 
@@ -256,7 +255,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        Community medicalCenter = (Community) model.getValueAt(selectedRowIndex, 0);
+        CommunityAdmin medicalCenter = (CommunityAdmin) model.getValueAt(selectedRowIndex, 0);
 
         // TODO: Add validations later
         String username = jTextField1.getText();
@@ -290,7 +289,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        for (Community vm : this.covidVaccinationSystem.getCommunity()) {
+        for (CommunityAdmin vm : this.covidVaccinationSystem.getCommunityDirectory().getCommunities()) {
             Object[] row = new Object[3];
             row[0] = vm;                     
             row[1] = vm.getName();

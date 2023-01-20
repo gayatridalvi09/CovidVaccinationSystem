@@ -206,7 +206,7 @@ public class CovidCharityPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         CovidCharity covidCharity = (CovidCharity) model.getValueAt(selectedRowIndex, 0);
 
-        covidVaccinationSystem.getCovidCharities().remove(covidCharity);
+        covidVaccinationSystem.getCovidCharityDirectory().getCovidCharities().remove(covidCharity);
 
         populateTable();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -240,7 +240,7 @@ public class CovidCharityPanel extends javax.swing.JPanel {
         CovidCharity covidCharity = new CovidCharity(
             new ArrayList<>(), username, password, companyName, Role.PUBLIC_DONOR);
 
-        covidVaccinationSystem.addCovidCharity(covidCharity);
+        covidVaccinationSystem.getCovidCharityDirectory().addCovidCharity(covidCharity);
 
         populateTable();
 
@@ -288,7 +288,7 @@ public class CovidCharityPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        for (CovidCharity vm : this.covidVaccinationSystem.getCovidCharities()) {
+        for (CovidCharity vm : this.covidVaccinationSystem.getCovidCharityDirectory().getCovidCharities()) {
             Object[] row = new Object[3];
             row[0] = vm;                     
             row[1] = vm.getName();

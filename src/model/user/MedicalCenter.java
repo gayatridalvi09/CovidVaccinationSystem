@@ -14,6 +14,7 @@ import java.util.List;
 public class MedicalCenter extends User {
     private List<VaccineRequest> vaccineRequests;
     private List<FundsRequest> fundsRequests;
+    private List<Appointment> appointments;
     private EmployeeDirectory employeeDirectory;
 
     public MedicalCenter(String username, String password, String name, Role role) {
@@ -21,6 +22,7 @@ public class MedicalCenter extends User {
         this.employeeDirectory = new EmployeeDirectory(new ArrayList<>());
         this.vaccineRequests = new ArrayList<>();
         this.fundsRequests = new ArrayList<>();
+        this.appointments = new ArrayList<>();
     } 
 
     public EmployeeDirectory getEmployeeDirectory() {
@@ -54,5 +56,16 @@ public class MedicalCenter extends User {
     public void addFundsRequest(FundsRequest fundsRequest) {
         this.fundsRequests.add(fundsRequest);
     }
+
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments = appointments;
+    }
     
+    public void addAppointment(Appointment appointment) {
+        this.appointments.add(appointment);
+    }
 }

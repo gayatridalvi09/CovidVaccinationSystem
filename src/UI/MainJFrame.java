@@ -6,8 +6,10 @@ package UI;
 
 import model.user.CommunityAdmin;
 import model.user.CovidCharity;
+import model.user.Employee;
 import model.user.MedicalCenter;
 import model.user.PublicDonor;
+import model.user.Role;
 import model.user.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
 
@@ -235,6 +237,23 @@ public class MainJFrame extends javax.swing.JFrame {
                     DonateFunds publicFund = new DonateFunds(
                             jSplitPane1, covidVaccinationSystem, publicDonor);
                     jSplitPane1.setRightComponent(publicFund);
+                }
+            }
+        }
+        
+        for (MedicalCenter medicalCenter: covidVaccinationSystem.getMedicalCenterDirectory().getMedicalCenters()) {
+            for (Employee employee: medicalCenter.getEmployeeDirectory().getEmployees()) {
+                if (employee.getUsername().equals(username) 
+                        && employee.getPassword().equals(password)) {
+                    if (employee.getRole().equals(Role.NURSE)) {
+                        NursePatientAppointmentAction nursePatientAppointmentAction = new NursePatientAppointmentAction(
+                                jSplitPane1, covidVaccinationSystem, employee, medicalCenter);
+                        jSplitPane1.setRightComponent(nursePatientAppointmentAction);
+                    } else {
+                        ReceptionistPatientAppointmentPanel receptionistPatientAppointmentPanel = new ReceptionistPatientAppointmentPanel(
+                                jSplitPane1, covidVaccinationSystem, employee, medicalCenter);
+                        jSplitPane1.setRightComponent(receptionistPatientAppointmentPanel);
+                    }
                 }
             }
         }

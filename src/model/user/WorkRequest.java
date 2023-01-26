@@ -12,7 +12,7 @@ public class WorkRequest {
     private Status status;
     
     public enum Status {
-        PENDING, APPROVED, DENIED;
+        PENDING, APPROVED, DENIED, VACCINATED;
     }
     
     public WorkRequest(Status status) {

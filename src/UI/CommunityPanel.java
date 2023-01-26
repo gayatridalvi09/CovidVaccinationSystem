@@ -4,16 +4,35 @@
  */
 package UI;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
+import javax.swing.table.DefaultTableModel;
+import model.user.Community;
+import model.user.CommunityAdmin;
+import model.user.CovidCharity;
+import model.user.Role;
+import model.vaccinationsystem.CovidVaccinationSystem;
+
 /**
  *
  * @author gayat
  */
 public class CommunityPanel extends javax.swing.JPanel {
+    private final CovidVaccinationSystem covidVaccinationSystem;
+    private javax.swing.JSplitPane splitPane;
+    private CommunityAdmin communityAdmin;
+
 
     /**
-     * Creates new form CommunityPanel
+     * Creates new form CovidCharityPanel
      */
-    public CommunityPanel() {
+    public CommunityPanel(JSplitPane splitPane,
+            CovidVaccinationSystem covidVaccinationSystem, CommunityAdmin communityAdmin) {
+       this.covidVaccinationSystem = covidVaccinationSystem;
+       this.splitPane = splitPane;
+       this.communityAdmin = communityAdmin;
+
         initComponents();
     }
 
@@ -31,21 +50,9 @@ public class CommunityPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         lblCityName = new javax.swing.JLabel();
         txtCityName = new javax.swing.JTextField();
-        btnCity = new javax.swing.JButton();
-        btnView = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        comboCity = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        txtComm = new javax.swing.JTextField();
-        btnAddComm = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtAdd = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        comboAddCity = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        comboAddComm = new javax.swing.JComboBox<>();
         btnAddHouse = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 153, 255));
 
@@ -55,13 +62,13 @@ public class CommunityPanel extends javax.swing.JPanel {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "City", "Community", "Zip Code"
+                "City", "Zip Code"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -74,59 +81,12 @@ public class CommunityPanel extends javax.swing.JPanel {
             }
         });
 
-        btnCity.setText("Add City");
-        btnCity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCityActionPerformed(evt);
-            }
-        });
-
-        btnView.setText("View");
-        btnView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Select City :");
-
-        comboCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel3.setText("Community :");
-
-        btnAddComm.setText("Add Community");
-        btnAddComm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddCommActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Zip Code :");
 
-        jLabel5.setText("City :");
-
-        comboAddCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboAddCity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboAddCityActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("Community :");
-
-        comboAddComm.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        btnAddHouse.setText("Add");
+        btnAddHouse.setText("Submit");
         btnAddHouse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddHouseActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Update");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -134,65 +94,27 @@ public class CommunityPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(243, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(291, 291, 291))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAddComm)
-                        .addGap(136, 136, 136))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnView)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(109, 109, 109))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCity)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblCityName, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(43, 43, 43))
+                            .addComponent(btnAddHouse)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel4))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCityName)
-                            .addComponent(txtAdd)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(comboAddCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                                .addComponent(jLabel6)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                        .addComponent(txtComm, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(190, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(160, 160, 160)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(comboAddComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(281, 281, 281)
-                .addComponent(btnAddHouse)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(lblCityName, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(43, 43, 43)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtCityName)
+                                    .addComponent(txtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(256, 256, 256))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,36 +123,18 @@ public class CommunityPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnView)
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCityName)
-                    .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(comboCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCity)
-                    .addComponent(jLabel3)
-                    .addComponent(txtComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnAddComm)
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGap(97, 97, 97)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblCityName)
+                            .addComponent(txtCityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel4))
                     .addComponent(txtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(comboAddCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(comboAddComm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAddHouse)
-                    .addComponent(jButton1))
-                .addGap(22, 22, 22))
+                .addGap(50, 50, 50)
+                .addComponent(btnAddHouse)
+                .addContainerGap(181, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -238,311 +142,43 @@ public class CommunityPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCityNameActionPerformed
 
-    private void btnCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCityActionPerformed
-        // TODO add your handling code here:
-        String cityName = txtCityName.getText();
-        if (cityName.isEmpty() || cityName.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Please enter city name");
-            return;
-        }
-
-        for (City city: this.healthCareSystem.getCityDirectory().getCities()) {
-            if (city.getCityName().equals(cityName)) {
-                JOptionPane.showMessageDialog(this, "City exists");
-                return;
-            }
-        }
-
-        City city = new City(cityName);
-        this.healthCareSystem.getCityDirectory().addCity(city);
-        cityComboBox(0);
-        populateTable();
-        txtCityName.setText("");
-    }//GEN-LAST:event_btnCityActionPerformed
-
-    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        // TODO add your handling code here:
-        int selectedRowIndex = jTable1.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row to view");
-            return;
-        }
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
-        try {
-            House house = (House) model.getValueAt(selectedRowIndex, 2);
-            Community community = (Community) model.getValueAt(selectedRowIndex, 1);
-            City city = (City) model.getValueAt(selectedRowIndex, 0);
-
-            int cityIndex = 0;
-            City selectedCity = null;
-            for (int i = 0; i < this.healthCareSystem.getCityDirectory().getCities().size(); i++) {
-                City c = this.healthCareSystem.getCityDirectory().getCities().get(i);
-                if (c.getCityName().equals(city.getCityName())) {
-                    selectedCity = c;
-                    cityIndex = i;
-                    break;
-                }
-            }
-
-            int commIndex = 0;
-            Community selectedComm = null;
-            for (int i = 0; i < selectedCity.getComm().size(); i++) {
-                Community c = selectedCity.getComm().get(i);
-                if (c.getCommunity().equals(community.getCommunity())) {
-                    selectedComm = c;
-                    commIndex = i;
-                    break;
-                }
-            }
-
-            txtAdd.setText(house.getAddress());
-            cityComboBox(cityIndex);
-            communityComboBox(selectedCity.getCityName(), commIndex);
-            this.previousHouseAddress = house.getAddress();
-
-        } catch (ClassCastException e) {
-            try {
-                Community comm = (Community) model.getValueAt(selectedRowIndex, 1);
-                City city = (City) model.getValueAt(selectedRowIndex, 0);
-
-                int cityIndex = 0;
-                City selectedCity = null;
-                for (int i = 0; i < this.healthCareSystem.getCityDirectory().getCities().size(); i++) {
-                    City c = this.healthCareSystem.getCityDirectory().getCities().get(i);
-                    if (c.getCityName().equals(city.getCityName())) {
-                        selectedCity = c;
-                        cityIndex = i;
-                        break;
-                    }
-                }
-
-                int commIndex = 0;
-                Community selectedComm = null;
-                for (int i = 0; i < selectedCity.getComm().size(); i++) {
-                    Community c = selectedCity.getComm().get(i);
-                    if (c.getCommunity().equals(comm.getCommunity())) {
-                        selectedComm = c;
-                        commIndex = i;
-                        break;
-                    }
-                }
-
-                cityComboBox(cityIndex);
-                communityComboBox(selectedCity.getCityName(), commIndex);
-
-            } catch (ClassCastException ex) {
-                City city = (City) model.getValueAt(selectedRowIndex, 0);
-
-                int cityIndex = 0;
-                City selectedCity = null;
-                for (int i = 0; i < this.healthCareSystem.getCityDirectory().getCities().size(); i++) {
-                    City c = this.healthCareSystem.getCityDirectory().getCities().get(i);
-                    if (c.getCityName().equals(city.getCityName())) {
-                        selectedCity = c;
-                        cityIndex = i;
-                        break;
-                    }
-                }
-
-                cityComboBox(cityIndex);
-
-            }
-        }
-    }//GEN-LAST:event_btnViewActionPerformed
-
-    private void btnAddCommActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCommActionPerformed
-        // TODO add your handling code here:
-        String community1 = txtComm.getText();
-        if (community1.isEmpty() || community1.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Please enter community name");
-            return;
-        }
-
-        if (comboCity.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Please select a city");
-            return;
-        }
-
-        String cityName = comboCity.getSelectedItem().toString();
-        int cityIndex = 0;
-        City selectedCity = null;
-        for (int i = 0; i < this.healthCareSystem.getCityDirectory().getCities().size(); i++) {
-            City c = this.healthCareSystem.getCityDirectory().getCities().get(i);
-            if (c.getCityName().equals(cityName)) {
-                selectedCity = c;
-                cityIndex = i;
-                break;
-            }
-        }
-
-        for (Community c: selectedCity.getComm()) {
-            if (c.getCommunity().equals(community1)) {
-                JOptionPane.showMessageDialog(this, "Community already exists");
-                return;
-            }
-        }
-
-        Community community = new Community(community1);
-        selectedCity.getComm().add(community);
-        cityComboBox(cityIndex);
-        communityComboBox(selectedCity.getCityName(), 0);
-        populateTable();
-
-        txtComm.setText("");
-
-    }//GEN-LAST:event_btnAddCommActionPerformed
-
-    private void comboAddCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAddCityActionPerformed
-        // TODO add your handling code here:
-        if (comboAddCity.getSelectedItem() != null) {
-            String presentCity = comboAddCity.getSelectedItem().toString();
-            communityComboBox(presentCity, 0);
-        }
-    }//GEN-LAST:event_comboAddCityActionPerformed
-
     private void btnAddHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddHouseActionPerformed
         // TODO add your handling code here:
+        String cityName = txtCityName.getText();
+        String zip = txtAdd.getText();
 
-        String add = txtAdd.getText();
-        if (add.isEmpty() || add.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Please enter Address");
-            return;
-        }
+        Community community = new Community(cityName, zip);
 
-        String cityName = comboAddCity.getSelectedItem().toString();
-        if (comboAddComm.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Add community first");
-            return;
-        }
-        String communityName = comboAddComm.getSelectedItem().toString();
+        communityAdmin.getcommunityDirectory().addCommunity(community);
 
-        House house = new House(add);
-
-        int cityIndex = 0;
-        City selectedCity = null;
-        for (int i = 0; i < this.healthCareSystem.getCityDirectory().getCities().size(); i++) {
-            City c = this.healthCareSystem.getCityDirectory().getCities().get(i);
-            if (c.getCityName().equals(cityName)) {
-                selectedCity = c;
-                cityIndex = i;
-                break;
-            }
-        }
-
-        int commIndex = 0;
-        Community selectedComm = null;
-        for (int i = 0; i < selectedCity.getComm().size(); i++) {
-            Community c = selectedCity.getComm().get(i);
-            if (c.getCommunity().equals(communityName)) {
-                selectedComm = c;
-                commIndex = i;
-                break;
-            }
-        }
-
-        for (House h: selectedComm.getHouses()) {
-            if (h.getAddress().equals(add)) {
-                JOptionPane.showMessageDialog(this, "Address exists");
-                return;
-            }
-        }
-
-        selectedComm.getHouses().add(house);
-        cityComboBox(cityIndex);
-        communityComboBox(cityName, commIndex);
         populateTable();
 
+        txtCityName.setText("");
         txtAdd.setText("");
-
     }//GEN-LAST:event_btnAddHouseActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    
+    private void populateTable() {
 
-        int selectedRowIndex = jTable1.getSelectedRow();
-        if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row to update");
-            return;
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        for (Community cm : this.communityAdmin.getcommunityDirectory().getCommunities()) {
+            Object[] row = new Object[2];
+            row[0] = cm;                     
+            row[1] = cm.getZipCode();
+            model.addRow(row);
         }
 
-        String address = txtAdd.getText();
-        if (address.isEmpty() || address.isBlank()) {
-            JOptionPane.showMessageDialog(this, "Please enter an address");
-            return;
-        }
-
-        String cityName = comboAddCity.getSelectedItem().toString();
-        if (comboAddComm.getSelectedItem() == null) {
-            JOptionPane.showMessageDialog(this, "Add community first");
-            return;
-        }
-        String communityName = comboAddComm.getSelectedItem().toString();
-
-        int cityIndex = 0;
-        City selectedCity = null;
-        for (int i = 0; i < this.healthCareSystem.getCityDirectory().getCities().size(); i++) {
-            City c = this.healthCareSystem.getCityDirectory().getCities().get(i);
-            if (c.getCityName().equals(cityName)) {
-                selectedCity = c;
-                cityIndex = i;
-                break;
-            }
-        }
-
-        int commIndex = 0;
-        Community selectedComm = null;
-        for (int i = 0; i < selectedCity.getComm().size(); i++) {
-            Community c = selectedCity.getComm().get(i);
-            if (c.getCommunity().equals(communityName)) {
-                selectedComm = c;
-                commIndex = i;
-                break;
-            }
-        }
-
-        House selectedHouse = null;
-        for (int i = 0; i < selectedComm.getHouses().size(); i++) {
-            House h = selectedComm.getHouses().get(i);
-            if (h.getAddress().equals(this.previousHouseAddress)) {
-                selectedHouse = h;
-                break;
-            }
-        }
-        if (!this.previousHouseAddress.equals(address)) {
-            selectedHouse.setAddress(address);
-        }
-
-        cityComboBox(cityIndex);
-        communityComboBox(cityName, commIndex);
-        populateTable();
-
-        txtAdd.setText("");
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddComm;
     private javax.swing.JButton btnAddHouse;
-    private javax.swing.JButton btnCity;
-    private javax.swing.JButton btnView;
-    private javax.swing.JComboBox<String> comboAddCity;
-    private javax.swing.JComboBox<String> comboAddComm;
-    private javax.swing.JComboBox<String> comboCity;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCityName;
     private javax.swing.JTextField txtAdd;
     private javax.swing.JTextField txtCityName;
-    private javax.swing.JTextField txtComm;
     // End of variables declaration//GEN-END:variables
 }

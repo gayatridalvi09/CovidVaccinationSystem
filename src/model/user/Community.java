@@ -10,12 +10,10 @@ package model.user;
  */
 public class Community {
     private String city;
-    private String name;
     private String zipCode;
 
-    public Community(String city, String name, String zipCode) {
+    public Community(String city, String zipCode) {
         this.city = city;
-        this.name = name;
         this.zipCode = zipCode;
     }
 
@@ -27,14 +25,6 @@ public class Community {
         this.city = city;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getZipCode() {
         return zipCode;
     }
@@ -43,5 +33,9 @@ public class Community {
         this.zipCode = zipCode;
     }
     
+    @Override
+    public String toString() {
+        return city;
+    }
     
 }

@@ -260,7 +260,7 @@ public class CovidCharityListPanel extends javax.swing.JPanel
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        CovidCharity vaccineManufacturer = (CovidCharity) model.getValueAt(selectedRowIndex, 0);
+        CovidCharity covidCharity = (CovidCharity) model.getValueAt(selectedRowIndex, 0);
 
         // TODO: Add validations later
         String username = jTextField1.getText();
@@ -272,9 +272,9 @@ public class CovidCharityListPanel extends javax.swing.JPanel
             JOptionPane.showMessageDialog(this,"Please select a valid role");
         }
 
-        vaccineManufacturer.setUsername(username);
-        vaccineManufacturer.setPassword(password);
-        vaccineManufacturer.setName(brandName);
+        covidCharity.setUsername(username);
+        covidCharity.setPassword(password);
+        covidCharity.setName(brandName);
 
         populateTable();
 

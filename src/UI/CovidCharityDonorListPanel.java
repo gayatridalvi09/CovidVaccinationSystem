@@ -16,7 +16,7 @@ import model.vaccinationsystem.CovidVaccinationSystem;
  *
  * @author gayat
  */
-public class CovidCharityPanel extends javax.swing.JPanel {
+public class CovidCharityDonorListPanel extends javax.swing.JPanel {
     private final CovidVaccinationSystem covidVaccinationSystem;
     private javax.swing.JSplitPane splitPane;
 
@@ -24,7 +24,7 @@ public class CovidCharityPanel extends javax.swing.JPanel {
     /**
      * Creates new form CovidCharityPanel
      */
-    public CovidCharityPanel(JSplitPane splitPane,CovidVaccinationSystem covidVaccinationSystem) {
+    public CovidCharityDonorListPanel(JSplitPane splitPane,CovidVaccinationSystem covidVaccinationSystem) {
        this.covidVaccinationSystem = covidVaccinationSystem;
        this.splitPane = splitPane;
 
@@ -66,7 +66,7 @@ public class CovidCharityPanel extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel1.setText("Covid Charity Panel");
+        jLabel1.setText("Covid Charity Donors List Panel");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,7 +76,7 @@ public class CovidCharityPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Username", "Ngo Name", "Role"
+                "Username", "Name", "Role"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -104,7 +104,7 @@ public class CovidCharityPanel extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Public Donation" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Public Donor" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -119,7 +119,7 @@ public class CovidCharityPanel extends javax.swing.JPanel {
         });
 
         jLabel5.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel5.setText("NGO Name:");
+        jLabel5.setText("Name:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

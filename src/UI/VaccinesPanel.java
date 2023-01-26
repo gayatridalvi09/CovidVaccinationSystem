@@ -4,9 +4,14 @@
  */
 package UI;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
+import model.user.Community;
+import model.user.CommunityAdmin;
+import model.user.CommunityAdminDirectory;
 import model.user.Employee;
 import model.user.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
@@ -30,6 +35,8 @@ public class VaccinesPanel extends javax.swing.JPanel {
         this.splitPane = splitPane;
         this.covidVaccinationSystem = covidVaccinationSystem;
         this.vaccineManufacturer = vaccineManufacturer;
+        
+        cityComboBox(0);
         
         populateTable();
     }
@@ -89,7 +96,12 @@ public class VaccinesPanel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jLabel4.setText("Disbursement City:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ohio", "San Jose", "Boston", "NYC" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item1" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Add");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +203,29 @@ public class VaccinesPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void cityComboBox(int selectedIndex) {
+        
+        jComboBox1.removeAllItems();
+        Set<String> cities = new HashSet<>();
+        
+        for(CommunityAdmin cad : this.covidVaccinationSystem.getCommunityDirectory().getCommunities()){
+            for (Community c : cad.getcommunityDirectory().getCommunities()) {
+                cities.add(c.getCity());
+            }
+        }
+        
+        for (String city: cities) {
+            jComboBox1.addItem(city);
+        }
+        
+        jComboBox1.setSelectedIndex(selectedIndex);
+        
+    }
+    
     private void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();

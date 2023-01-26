@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 import model.user.CovidCharity;
+import model.user.PublicDonor;
 import model.user.Role;
 import model.vaccinationsystem.CovidVaccinationSystem;
 
@@ -19,16 +20,21 @@ import model.vaccinationsystem.CovidVaccinationSystem;
 public class CovidCharityDonorListPanel extends javax.swing.JPanel {
     private final CovidVaccinationSystem covidVaccinationSystem;
     private javax.swing.JSplitPane splitPane;
+    private CovidCharity covidCharity;
 
 
     /**
      * Creates new form CovidCharityPanel
      */
-    public CovidCharityDonorListPanel(JSplitPane splitPane,CovidVaccinationSystem covidVaccinationSystem) {
+    public CovidCharityDonorListPanel(JSplitPane splitPane,
+            CovidVaccinationSystem covidVaccinationSystem, CovidCharity covidCharity) {
        this.covidVaccinationSystem = covidVaccinationSystem;
        this.splitPane = splitPane;
+       this.covidCharity = covidCharity;
 
         initComponents();
+        
+        populateTable();
     }
 
     /**
@@ -55,6 +61,7 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JPasswordField();
+        jButton5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 153, 255));
 
@@ -121,10 +128,34 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jLabel5.setText("Name:");
 
+        jButton5.setText("Work Request");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(300, 300, 300))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(215, 215, 215)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4)
+                .addContainerGap(71, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(160, 160, 160)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,21 +179,6 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(215, 215, 215)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(300, 300, 300))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,7 +192,8 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
                     .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton2)
-                        .addComponent(jButton4)))
+                        .addComponent(jButton4)
+                        .addComponent(jButton5)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -204,9 +221,9 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        CovidCharity covidCharity = (CovidCharity) model.getValueAt(selectedRowIndex, 0);
+        PublicDonor publicDonor = (PublicDonor) model.getValueAt(selectedRowIndex, 0);
 
-        covidVaccinationSystem.getCovidCharityDirectory().getCovidCharities().remove(covidCharity);
+        covidCharity.getPublicDonors().remove(publicDonor);
 
         populateTable();
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -216,31 +233,31 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
 
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a Covid Charity to view");
+            JOptionPane.showMessageDialog(this, "Please select a Public Donor to view");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        CovidCharity covidCharity = (CovidCharity) model.getValueAt(selectedRowIndex, 0);
-        jTextField1.setText(covidCharity.getUsername());
-        jTextField2.setText(covidCharity.getPassword());
-        jTextField3.setText(covidCharity.getName());
+        PublicDonor publicDonor = (PublicDonor) model.getValueAt(selectedRowIndex, 0);
+        jTextField1.setText(publicDonor.getUsername());
+        jTextField2.setText(publicDonor.getPassword());
+        jTextField3.setText(publicDonor.getName());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String username = jTextField1.getText();
         String password = String.valueOf(jTextField2.getPassword());
-        String companyName = jTextField3.getText();
+        String name = jTextField3.getText();
         int role = jComboBox1.getSelectedIndex();
 
         if (role == -1|| role != 0) {
             JOptionPane.showMessageDialog(this,"Please select a valid role");
         }
 
-        CovidCharity covidCharity = new CovidCharity(
-            new ArrayList<>(), username, password, companyName, Role.PUBLIC_DONOR);
+        PublicDonor publicDonor = new PublicDonor(
+            new ArrayList<>(), username, password, name, Role.PUBLIC_DONOR);
 
-        covidVaccinationSystem.getCovidCharityDirectory().addCovidCharity(covidCharity);
+        covidCharity.addPublicDonors(publicDonor);
 
         populateTable();
 
@@ -258,25 +275,25 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
 
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a COvid Charity to delete");
+            JOptionPane.showMessageDialog(this, "Please select a public donor to update");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        CovidCharity covidCharity = (CovidCharity) model.getValueAt(selectedRowIndex, 0);
+        PublicDonor publicDonor = (PublicDonor) model.getValueAt(selectedRowIndex, 0);
 
         // TODO: Add validations later
         String username = jTextField1.getText();
         String password = String.valueOf(jTextField2.getPassword());
-        String brandName = jTextField3.getText();
+        String name = jTextField3.getText();
         String role = jComboBox1.getSelectedItem().toString();
         
 
 
 
-        covidCharity.setUsername(username);
-        covidCharity.setPassword(password);
-        covidCharity.setName(brandName);
-        covidCharity.setRole(Role.PUBLIC_DONOR);
+        publicDonor.setUsername(username);
+        publicDonor.setPassword(password);
+        publicDonor.setName(name);
+        publicDonor.setRole(Role.PUBLIC_DONOR);
 
         populateTable();
 
@@ -284,15 +301,23 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
         jTextField2.setText("");
         jTextField3.setText("");
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        DonateFundsAction donateFundsAction = new DonateFundsAction(
+                            splitPane, covidVaccinationSystem, covidCharity);
+                    splitPane.setRightComponent(donateFundsAction);
+    }//GEN-LAST:event_jButton5ActionPerformed
+    
     private void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        for (CovidCharity vm : this.covidVaccinationSystem.getCovidCharityDirectory().getCovidCharities()) {
+        for (PublicDonor pd : this.covidCharity.getPublicDonors()) {
             Object[] row = new Object[3];
-            row[0] = vm;                     
-            row[1] = vm.getName();
-            row[2] = vm.getRole().getName();
+            row[0] = pd;                     
+            row[1] = pd.getName();
+            row[2] = pd.getRole().getName();
             model.addRow(row);
         }
 
@@ -304,6 +329,7 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

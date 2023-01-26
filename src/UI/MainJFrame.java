@@ -7,6 +7,7 @@ package UI;
 import model.user.CommunityAdmin;
 import model.user.CovidCharity;
 import model.user.MedicalCenter;
+import model.user.PublicDonor;
 import model.user.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
 
@@ -213,7 +214,7 @@ public class MainJFrame extends javax.swing.JFrame {
             if (covidCharity.getUsername().equals(username) 
                     && covidCharity.getPassword().equals(password)) {
                 CovidCharityDonorListPanel covidCharityPanel = new CovidCharityDonorListPanel(
-                        jSplitPane1, covidVaccinationSystem);
+                        jSplitPane1, covidVaccinationSystem, covidCharity);
                 jSplitPane1.setRightComponent(covidCharityPanel);
             }
         }
@@ -224,6 +225,17 @@ public class MainJFrame extends javax.swing.JFrame {
                 CommunityPanel communityPanel = new CommunityPanel(
                         jSplitPane1, covidVaccinationSystem, communityAdmin);
                 jSplitPane1.setRightComponent(communityPanel);
+            }
+        }
+        
+        for (CovidCharity covidCharity: covidVaccinationSystem.getCovidCharityDirectory().getCovidCharities()) {
+            for (PublicDonor publicDonor: covidCharity.getPublicDonors()) {
+                if (publicDonor.getUsername().equals(username) 
+                        && publicDonor.getPassword().equals(password)) {
+                    DonateFunds publicFund = new DonateFunds(
+                            jSplitPane1, covidVaccinationSystem, publicDonor);
+                    jSplitPane1.setRightComponent(publicFund);
+                }
             }
         }
         

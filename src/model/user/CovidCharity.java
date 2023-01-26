@@ -16,4 +16,18 @@ public class CovidCharity extends User {
         super(username, password, name, role);
         this.publicDonors = publicDonors;
     }
+
+    public List<PublicDonor> getPublicDonors() {
+        return publicDonors;
+    }
+
+    public void setPublicDonors(List<PublicDonor> publicDonors) {
+        this.publicDonors = publicDonors;
+    }
+    
+    
+    public void addPublicDonors(PublicDonor publicDonor) {
+        this.publicDonors.add(publicDonor);
+    }
+    
 }

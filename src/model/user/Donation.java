@@ -8,11 +8,12 @@ package model.user;
  *
  * @author gayat
  */
-public class Donation {
+public class Donation extends WorkRequest {
     private String reason;
     private int amount;
     
     public Donation(String reason, int amount) {
+        super(WorkRequest.Status.PENDING);
         this.reason = reason;
         this.amount = amount;
     }
@@ -31,5 +32,10 @@ public class Donation {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+    
+    @Override
+    public String toString() {
+        return reason;
     }
 }

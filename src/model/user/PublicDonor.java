@@ -13,8 +13,9 @@ import java.util.List;
 public class PublicDonor extends User {
     private List<Donation> donations;
 
-    public PublicDonor(String username, String password, String name,
-            Role role, List<Donation>donations) {
+    public PublicDonor(List<Donation>donations, String username, 
+            String password, String name,
+            Role role) {
         super(username, password, name, role);
         this.donations = donations;
     }

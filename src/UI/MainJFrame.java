@@ -4,13 +4,22 @@
  */
 package UI;
 
-import model.user.CommunityAdmin;
-import model.user.CovidCharity;
-import model.user.Employee;
-import model.user.MedicalCenter;
-import model.user.PublicDonor;
-import model.user.Role;
-import model.user.VaccineManufacturer;
+import UI.publicdonor.DonateFunds;
+import UI.systemadmin.SystemAdminPanel;
+import UI.vaccinemanufacturer.VaccinesPanel;
+import UI.employee.ReceptionistPatientAppointmentPanel;
+import UI.employee.NursePatientAppointmentAction;
+import UI.medicalcenter.MedicalCenterEmployeesPanel;
+import UI.covidcharity.CovidCharityDonorListPanel;
+import UI.community.CommunityPanel;
+import model.users.CommunityAdmin;
+import model.users.CovidCharity;
+import model.config.DbConnector;
+import model.users.Employee;
+import model.users.MedicalCenter;
+import model.users.PublicDonor;
+import model.role.Role;
+import model.users.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
 
 
@@ -20,13 +29,14 @@ import model.vaccinationsystem.CovidVaccinationSystem;
  */
 public class MainJFrame extends javax.swing.JFrame {
     private CovidVaccinationSystem covidVaccinationSystem;
+    private DbConnector dbConnector = DbConnector.getInstance();
 
     /**
      * Creates new form MainJFrame
      */
     public MainJFrame() {
         initComponents();
-        covidVaccinationSystem = new CovidVaccinationSystem();
+        covidVaccinationSystem = dbConnector.retrieveSystem();
     }
 
     /**

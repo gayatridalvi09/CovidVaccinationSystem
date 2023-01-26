@@ -6,20 +6,29 @@ package model.vaccinationsystem;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.user.CommunityAdmin;
-import model.user.CommunityAdminDirectory;
-import model.user.CovidCharity;
-import model.user.CovidCharityDirectory;
-import model.user.MedicalCenter;
-import model.user.MedicalCenterDirectory;
-import model.user.VaccineManufacturer;
-import model.user.VaccineManufacturerDirectory;
+import model.users.CommunityAdmin;
+import model.directories.CommunityAdminDirectory;
+import model.users.CovidCharity;
+import model.directories.CovidCharityDirectory;
+import model.users.MedicalCenter;
+import model.directories.MedicalCenterDirectory;
+import model.users.VaccineManufacturer;
+import model.directories.VaccineManufacturerDirectory;
 
 /**
  *
  * @author gayat
  */
 public class CovidVaccinationSystem {
+    private static CovidVaccinationSystem covidVaccinationSystem;
+    
+    public static CovidVaccinationSystem getInstance(){
+        if(covidVaccinationSystem == null){
+            covidVaccinationSystem = new CovidVaccinationSystem();
+        }
+        return covidVaccinationSystem;
+    }
+    
     private VaccineManufacturerDirectory vaccineManufacturerDirectory;    
     private MedicalCenterDirectory medicalCenterDirectory;
     private CovidCharityDirectory covidCharityDirectory;
@@ -28,7 +37,7 @@ public class CovidVaccinationSystem {
 
 
     
-    public CovidVaccinationSystem() {
+    private CovidVaccinationSystem() {
         this.vaccineManufacturerDirectory = new VaccineManufacturerDirectory(new ArrayList<>());
         this.medicalCenterDirectory = new MedicalCenterDirectory(new ArrayList<>());
         this.covidCharityDirectory = new CovidCharityDirectory(new ArrayList<>());

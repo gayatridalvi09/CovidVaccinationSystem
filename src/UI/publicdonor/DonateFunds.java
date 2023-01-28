@@ -81,7 +81,7 @@ public class DonateFunds extends javax.swing.JPanel {
         jLabel2.setText("Description:");
 
         jLabel3.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel3.setText("Amount:");
+        jLabel3.setText("Amount($):");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,9 +119,6 @@ public class DonateFunds extends javax.swing.JPanel {
                         .addGap(261, 261, 261)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(427, 427, 427)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(406, 406, 406)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
@@ -134,6 +131,10 @@ public class DonateFunds extends javax.swing.JPanel {
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(353, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(427, 427, 427)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,14 +163,24 @@ public class DonateFunds extends javax.swing.JPanel {
         // TODO add your handling code here:String username = jTextField1.getText();
         String description = jTextArea1.getText();
         String amountStr = jTextField1.getText();
-        int amount = 0;
-        try {
-            amount = Integer.parseInt(amountStr);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Please enter valid amount");
+        if(description.isEmpty() || amountStr.isEmpty()){
+            JOptionPane.showMessageDialog(this, "All fields are mandatory");
             return;
             
+
         }
+        int amount =0;
+        try {
+            amount = Integer.parseInt(amountStr);
+            if (amount <= 0) {
+                JOptionPane.showMessageDialog(this, "Amount cannot be negative or 0");
+                return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Amount should be number");
+            return;
+        }
+     
 
         Donation donation = new Donation(description, amount);
 

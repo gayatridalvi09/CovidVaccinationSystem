@@ -202,9 +202,38 @@ public class VaccinesPanel extends javax.swing.JPanel {
         String name = jTextField1.getText();
         String quantity = jTextField2.getText();
         String city = (String) jComboBox1.getSelectedItem();
+
+        if(name.isEmpty() || quantity.isEmpty()){
+                        JOptionPane.showMessageDialog(this,"All fields are mandatory");
+                        
+          
+                        
+        }
+        else{
+            try {
+            int qty = Integer.parseInt(quantity);
+            if (qty <= 0) {
+                JOptionPane.showMessageDialog(this, "Age cannot be negative or 0");
+                return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Age should be number");
+            return;
+        
+
+
+        }
+
         Vaccine vaccine = new Vaccine(name, Integer.parseInt(quantity), city);
         this.vaccineManufacturer.getVaccineDirectory().addVaccine(vaccine);
         populateTable();
+        jTextField1.setText("");
+        jTextField2.setText("");
+        
+
+            
+        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

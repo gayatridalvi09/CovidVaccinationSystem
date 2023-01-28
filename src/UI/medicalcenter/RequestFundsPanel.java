@@ -165,16 +165,21 @@ public class RequestFundsPanel extends javax.swing.JPanel {
                         .addComponent(jLabel4)
                         .addGap(628, 628, 628))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(416, 416, 416)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(416, 416, 416)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jButton2)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(85, 85, 85)
+                .addGap(22, 22, 22)
+                .addComponent(jButton2)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,9 +199,7 @@ public class RequestFundsPanel extends javax.swing.JPanel {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addComponent(jButton1)
-                .addGap(26, 26, 26)
-                .addComponent(jButton2)
-                .addGap(46, 46, 46))
+                .addGap(95, 95, 95))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -204,19 +207,32 @@ public class RequestFundsPanel extends javax.swing.JPanel {
         // TODO add your handling code here:String username = jTextField1.getText();
         String description = jTextArea1.getText();
         String amountStr = jTextField1.getText();
-        int amount = 0;
-        try {
-            amount = Integer.parseInt(amountStr);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this,"Please enter valid amount");
-            return;
-        }
+
         
         int selectedIndex = jComboBox1.getSelectedIndex();
         if (selectedIndex == -1) {
             JOptionPane.showMessageDialog(this,"Please enter valid covid charity");
             return;
         }
+        if(description.isEmpty() || amountStr.isEmpty()){
+              JOptionPane.showMessageDialog(this,"All fields are mandatory");
+              return;
+ 
+        }
+        int amount =0;
+        try {
+            amount = Integer.parseInt(amountStr);
+            if (amount <= 0) {
+                JOptionPane.showMessageDialog(this, "Amount cannot be negative or 0");
+                return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Amount should be number");
+            return;
+        }
+        
+
+
         
         String ccName = (String) jComboBox1.getSelectedItem();
         CovidCharity ccSelected = null;

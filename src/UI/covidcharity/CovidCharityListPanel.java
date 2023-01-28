@@ -4,12 +4,17 @@
  */
 package UI.covidcharity;
 
+import UI.systemadmin.SystemAdminPanel;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 import model.users.CovidCharity;
 import model.config.DbConnector;
 import model.role.Role;
+import model.users.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
 
 /**
@@ -19,15 +24,19 @@ import model.vaccinationsystem.CovidVaccinationSystem;
 public class CovidCharityListPanel extends javax.swing.JPanel 
 {
     private final CovidVaccinationSystem covidVaccinationSystem;
+    private javax.swing.JSplitPane splitPane;
+
     private DbConnector dbConnector = DbConnector.getInstance();
 
     /**
      * Creates new form CovidCharityListPanel
      */
-    public CovidCharityListPanel(CovidVaccinationSystem covidVaccinationSystem) {
+    public CovidCharityListPanel(JSplitPane splitPane,CovidVaccinationSystem covidVaccinationSystem) {
         this.covidVaccinationSystem = covidVaccinationSystem;
+        this.splitPane = splitPane;
 
         initComponents();
+        populateTable();
     }
 
     /**
@@ -54,6 +63,7 @@ public class CovidCharityListPanel extends javax.swing.JPanel
         jLabel5 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JPasswordField();
+        jButton5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 153, 255));
 
@@ -120,54 +130,64 @@ public class CovidCharityListPanel extends javax.swing.JPanel
             }
         });
 
+        jButton5.setText("Back");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(160, 160, 160)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                    .addComponent(jTextField2))
-                .addGap(144, 144, 144)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(jTextField2))
+                        .addGap(144, 144, 144)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(215, 215, 215)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 253, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(300, 300, 300))
+                        .addGap(215, 215, 215)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jButton5)
+                        .addGap(272, 272, 272)
+                        .addComponent(jLabel1)))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
@@ -188,9 +208,9 @@ public class CovidCharityListPanel extends javax.swing.JPanel
                     .addComponent(jLabel5)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,15 +233,46 @@ public class CovidCharityListPanel extends javax.swing.JPanel
         // TODO add your handling code here:
         String username = jTextField1.getText();
         String password = String.valueOf(jTextField2.getPassword());
-        String companyName = jTextField3.getText();
+        String name = jTextField3.getText();
         int role = jComboBox1.getSelectedIndex();
 
         if (role == -1|| role != 0) {
             JOptionPane.showMessageDialog(this,"Please select a valid role");
         }
+        String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
+        
+        if (role == -1|| role != 0) {
+            JOptionPane.showMessageDialog(this,"Please select a valid role");
+        }
+        if(username.isEmpty()||password.isEmpty()||name.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
+
+        }
+       
+        else{
+       for (CovidCharity vm : this.covidVaccinationSystem.getCovidCharityDirectory().getCovidCharities()) {
+            if (vm.getUsername().equals(username)) {
+                JOptionPane.showMessageDialog(this, "Username exists");
+                return;
+            }
+        }
+
 
         CovidCharity covidCharity = new CovidCharity(
-            new ArrayList<>(), username, password, companyName, Role.NGO_HEAD);
+            new ArrayList<>(), username, password, name, Role.NGO_HEAD);
 
         covidVaccinationSystem.getCovidCharityDirectory().addCovidCharity(covidCharity);
 
@@ -230,6 +281,7 @@ public class CovidCharityListPanel extends javax.swing.JPanel
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -258,7 +310,7 @@ public class CovidCharityListPanel extends javax.swing.JPanel
 
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a COvid Charity to delete");
+            JOptionPane.showMessageDialog(this, "Please select a COvid Charity to update");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -267,23 +319,59 @@ public class CovidCharityListPanel extends javax.swing.JPanel
         // TODO: Add validations later
         String username = jTextField1.getText();
         String password = String.valueOf(jTextField2.getPassword());
-        String brandName = jTextField3.getText();
+        String name = jTextField3.getText();
         int role = jComboBox1.getSelectedIndex();
 
         if (role == -1|| role != 0) {
             JOptionPane.showMessageDialog(this,"Please select a valid role");
         }
+        String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
+        
+        if (role == -1|| role != 0) {
+            JOptionPane.showMessageDialog(this,"Please select a valid role");
+        }
+        if(username.isEmpty()||password.isEmpty()||name.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
+
+        }
+       
+        else{
+
+
 
         covidCharity.setUsername(username);
         covidCharity.setPassword(password);
-        covidCharity.setName(brandName);
+        covidCharity.setName(name);
 
         populateTable();
 
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        SystemAdminPanel systemAdmin = new SystemAdminPanel(
+            splitPane, covidVaccinationSystem);
+        splitPane.setRightComponent(systemAdmin);
+
+    }//GEN-LAST:event_jButton5ActionPerformed
     private void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -305,6 +393,7 @@ public class CovidCharityListPanel extends javax.swing.JPanel
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

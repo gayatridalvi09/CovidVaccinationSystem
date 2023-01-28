@@ -9,6 +9,8 @@ import javax.swing.table.DefaultTableModel;
 import model.users.MedicalCenter;
 import model.vaccinationsystem.CovidVaccinationSystem;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JSplitPane;
 import model.config.DbConnector;
 import model.users.Employee;
@@ -254,7 +256,7 @@ public class MedicalCenterEmployeesPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a medical center to view");
+            JOptionPane.showMessageDialog(this, "Please select a row to view");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -272,6 +274,36 @@ public class MedicalCenterEmployeesPanel extends javax.swing.JPanel {
         String employeeName = jTextField4.getText();
         String role = jComboBox1.getSelectedItem().toString();
         System.out.println(role);
+        
+                String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
+        
+        if(username.isEmpty()||password.isEmpty()||employeeName.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
+
+        }
+       
+        else{
+       for (Employee ec: this.medicalCenter.getEmployeeDirectory().getEmployees()) {
+            if (ec.getUsername().equals(username)) {
+                JOptionPane.showMessageDialog(this, "Username exists");
+                return;
+            }
+       }
+
+
         if(role.equals("Nurse")){
             Employee employee = new Employee(username, password, employeeName, Role.NURSE); // TODO Role
             medicalCenter.getEmployeeDirectory().addEmployee(employee);
@@ -287,6 +319,7 @@ public class MedicalCenterEmployeesPanel extends javax.swing.JPanel {
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField4.setText("");
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -304,11 +337,31 @@ public class MedicalCenterEmployeesPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Employee employee = (Employee) model.getValueAt(selectedRowIndex, 0);
 
-        // TODO: Add validations later
         String username = jTextField1.getText();
         String password = String.valueOf(jTextField2.getPassword());
         String employeeName = jTextField4.getText();
         String role = jComboBox1.getSelectedItem().toString();
+                String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
+        
+        
+        if(username.isEmpty()||password.isEmpty()||employeeName.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
+
+        }
+        else{
         
         if(role.equals("Nurse")){
             employee.setRole(Role.NURSE);
@@ -327,7 +380,7 @@ public class MedicalCenterEmployeesPanel extends javax.swing.JPanel {
         jTextField2.setText("");
         jTextField4.setText("");
         
-
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

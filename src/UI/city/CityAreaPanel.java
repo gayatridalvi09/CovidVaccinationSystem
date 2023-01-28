@@ -152,7 +152,25 @@ public class CityAreaPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         String cityName = txtCityName.getText();
         String zip = txtAdd.getText();
+        if(cityName.isEmpty() || zip.isEmpty()){
+        JOptionPane.showMessageDialog(this, "All fields are mandatory");
+        return;
+        }
 
+
+        for (Community cc: this.communityAdmin.getcommunityDirectory().getCommunities()) {
+
+            if (cc.getCity().equals(cityName)) {
+                JOptionPane.showMessageDialog(this, "Username exists");
+                return;
+            }
+            if (cc.getZipCode().equals(zip)) {
+                JOptionPane.showMessageDialog(this, "zip code exists");
+                return;
+            }
+
+            
+        }
         Community community = new Community(cityName, zip);
 
         communityAdmin.getcommunityDirectory().addCommunity(community);
@@ -161,6 +179,12 @@ public class CityAreaPanel extends javax.swing.JPanel {
 
         txtCityName.setText("");
         txtAdd.setText("");
+
+
+
+        
+
+        
     }//GEN-LAST:event_btnAddHouseActionPerformed
 
     

@@ -4,12 +4,17 @@
  */
 package UI.city;
 
+import UI.systemadmin.SystemAdminPanel;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
+import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 import model.users.CityAdmin;
 import model.config.DbConnector;
 import model.role.Role;
+import model.users.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
 
 /**
@@ -18,14 +23,17 @@ import model.vaccinationsystem.CovidVaccinationSystem;
  */
 public class CityAdminPanel extends javax.swing.JPanel {
     private final CovidVaccinationSystem covidVaccinationSystem;
+    private javax.swing.JSplitPane splitPane;
+
     private DbConnector dbConnector = DbConnector.getInstance();
 
 
     /**
      * Creates new form CommunityAdminPanel
      */
-    public CityAdminPanel(CovidVaccinationSystem covidVaccinationSystem) {
+    public CityAdminPanel(JSplitPane splitPane,CovidVaccinationSystem covidVaccinationSystem) {
         this.covidVaccinationSystem = covidVaccinationSystem;
+        this.splitPane = splitPane;
 
         initComponents();
         populateTable();
@@ -55,6 +63,7 @@ public class CityAdminPanel extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JPasswordField();
+        jButton5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 153, 255));
 
@@ -121,6 +130,13 @@ public class CityAdminPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setText("Back");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,8 +145,15 @@ public class CityAdminPanel extends javax.swing.JPanel {
                 .addContainerGap(132, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(321, 321, 321))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(197, 197, 197))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -152,24 +175,22 @@ public class CityAdminPanel extends javax.swing.JPanel {
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(134, 134, 134))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(197, 197, 197))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton3)
-                        .addGap(185, 185, 185))))
+                        .addGap(148, 148, 148))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(321, 321, 321))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton5))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -193,9 +214,9 @@ public class CityAdminPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(jButton3)
-                .addGap(70, 70, 70))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,7 +241,7 @@ public class CityAdminPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a medical center to view");
+            JOptionPane.showMessageDialog(this, "Please select a row to view");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -237,7 +258,34 @@ public class CityAdminPanel extends javax.swing.JPanel {
         String password = String.valueOf(jTextField2.getPassword());
         String hospitalName = jTextField4.getText();
         String role = jComboBox1.getSelectedItem().toString();
-        System.out.println(role);
+                String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
+        if(username.isEmpty()||password.isEmpty()||hospitalName.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
+
+        }
+       
+        else{
+         for (CityAdmin cc: this.covidVaccinationSystem.getCommunityDirectory().getCommunities()) {
+            if (cc.getUsername().equals(username)) {
+                JOptionPane.showMessageDialog(this, "Username exists");
+                return;
+            }
+        }
+
+
             CityAdmin community = new CityAdmin(username, password, hospitalName, Role.CITY_ADMIN); // TODO Role
             covidVaccinationSystem.getCommunityDirectory().addCommunity(community);
 
@@ -249,7 +297,7 @@ public class CityAdminPanel extends javax.swing.JPanel {
         jTextField2.setText("");
         jTextField4.setText("");
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    }
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -259,7 +307,7 @@ public class CityAdminPanel extends javax.swing.JPanel {
 
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row to delete");
+            JOptionPane.showMessageDialog(this, "Please select a row to update");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -270,17 +318,28 @@ public class CityAdminPanel extends javax.swing.JPanel {
         String password = String.valueOf(jTextField2.getPassword());
         String medicalCenterName = jTextField4.getText();
         String role = jComboBox1.getSelectedItem().toString();
+        
 
-        if(role.equals("Nurse")){
+                String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
 
-            medicalCenter.setRole(Role.NURSE);
+        Matcher m = p.matcher(password);
+
+        
+        if(username.isEmpty()||password.isEmpty()||medicalCenterName.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
 
         }
         else{
-
-            medicalCenter.setRole(Role.RECEPTIONIST);
-
-        }
 
         medicalCenter.setUsername(username);
         medicalCenter.setPassword(password);
@@ -293,8 +352,16 @@ public class CityAdminPanel extends javax.swing.JPanel {
         jTextField4.setText("");
         
         dbConnector.storeSystem(covidVaccinationSystem);
-
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        SystemAdminPanel systemAdmin = new SystemAdminPanel(
+            splitPane, covidVaccinationSystem);
+        splitPane.setRightComponent(systemAdmin);
+
+    }//GEN-LAST:event_jButton5ActionPerformed
     private void populateTable() {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -315,6 +382,7 @@ public class CityAdminPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

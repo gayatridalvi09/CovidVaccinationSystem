@@ -5,6 +5,8 @@
 package UI.covidcharity;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
@@ -235,7 +237,7 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
 
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a Covid Charity to delete");
+            JOptionPane.showMessageDialog(this, "Please select a public donor to delete");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -271,6 +273,34 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
         if (role == -1|| role != 0) {
             JOptionPane.showMessageDialog(this,"Please select a valid role");
         }
+        String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
+        
+        if(username.isEmpty()||password.isEmpty()||name.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
+
+        }
+       
+        else{
+       for (PublicDonor donor : this.covidCharity.getPublicDonors()) {
+            if (donor.getUsername().equals(username)) {
+                JOptionPane.showMessageDialog(this, "Username exists");
+                return;
+            }
+        }
+
 
         PublicDonor publicDonor = new PublicDonor(
             new ArrayList<>(), username, password, name, Role.PUBLIC_DONOR);
@@ -282,6 +312,7 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -304,7 +335,28 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
         String password = String.valueOf(jTextField2.getPassword());
         String name = jTextField3.getText();
         String role = jComboBox1.getSelectedItem().toString();
+                String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
         
+        if(username.isEmpty()||password.isEmpty()||name.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
+
+        }
+       
+        else{
+
 
 
 
@@ -318,6 +370,7 @@ public class CovidCharityDonorListPanel extends javax.swing.JPanel {
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

@@ -4,13 +4,17 @@
  */
 package UI.vaccinemanufacturer;
 
+import UI.systemadmin.SystemAdminPanel;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.config.DbConnector;
 import model.role.Role;
 import model.users.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
+import javax.swing.JSplitPane;
 
 /**
  *
@@ -18,13 +22,17 @@ import model.vaccinationsystem.CovidVaccinationSystem;
  */
 public class VaccineManufacturerListPanel extends javax.swing.JPanel {
     private final CovidVaccinationSystem covidVaccinationSystem;
+    private javax.swing.JSplitPane splitPane;
+
     private DbConnector dbConnector = DbConnector.getInstance();
 
     /**
      * Creates new form VaccineManufacturerPanel
      */
-    public VaccineManufacturerListPanel(CovidVaccinationSystem covidVaccinationSystem) {
+    public VaccineManufacturerListPanel(JSplitPane splitPane,CovidVaccinationSystem covidVaccinationSystem) {
         this.covidVaccinationSystem = covidVaccinationSystem;
+        this.splitPane = splitPane;
+
         initComponents();
         populateTable();
     }
@@ -53,6 +61,7 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JPasswordField();
+        jButton5 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 153, 255));
 
@@ -119,6 +128,13 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setText("Back");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,7 +163,9 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 220, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(215, 215, 215)
+                .addGap(25, 25, 25)
+                .addComponent(jButton5)
+                .addGap(115, 115, 115)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton2)
@@ -167,8 +185,13 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jButton5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
@@ -200,21 +223,55 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
         String username = jTextField1.getText();
         String password = String.valueOf(jTextField2.getPassword());
         String companyName = jTextField3.getText();
+        String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
         int role = jComboBox1.getSelectedIndex();
         
         if (role == -1|| role != 0) {
             JOptionPane.showMessageDialog(this,"Please select a valid role");
         }
-        
+        if(username.isEmpty()||password.isEmpty()||companyName.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
+
+        }
+       
+        else{
+       for (VaccineManufacturer vc: this.covidVaccinationSystem.getVaccineManufacturerDirectory().getVaccineManufacturers()) {
+            if (vc.getUsername().equals(username)) {
+                JOptionPane.showMessageDialog(this, "Username exists");
+                return;
+            }
+        }
+
+            
         VaccineManufacturer vaccineManufactuerer = new VaccineManufacturer(username, password, companyName, Role.VACCINE_MANUFACTURER);
         
         covidVaccinationSystem.getVaccineManufacturerDirectory().addVaccineManufacturer(vaccineManufactuerer);
         
         populateTable();
+        System.out.print(username + password);
         
         jTextField1.setText("");
         jTextField2.setText("");
         jTextField3.setText("");
+
+        }
+        
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -222,7 +279,7 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
         
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a manufacturer to view");
+            JOptionPane.showMessageDialog(this, "Please select a row to view");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -237,7 +294,7 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
         
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a manufacturer to delete");
+            JOptionPane.showMessageDialog(this, "Please select a row to delete");
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -254,36 +311,69 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
         
         int selectedRowIndex = jTable1.getSelectedRow();
         if (selectedRowIndex < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a manufacturer to delete");
+            JOptionPane.showMessageDialog(this, "Please select a row to update");
             return;
         }
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         VaccineManufacturer vaccineManufacturer = (VaccineManufacturer) model.getValueAt(selectedRowIndex, 0);
         
         // TODO: Add validations later
         String username = jTextField1.getText();
         String password = String.valueOf(jTextField2.getPassword());
-        String brandName = jTextField3.getText();
+        String companyName = jTextField3.getText();
         int role = jComboBox1.getSelectedIndex();
+                String regex = "^(?=.*[0-9])"
+                       + "(?=.*[a-z])(?=.*[A-Z])"
+                       + "(?=.*[@#$%^&+=])"
+                       + "(?=\\S+$).{8,20}$";
+        Pattern p = Pattern.compile(regex);
+
+        Matcher m = p.matcher(password);
+
         
         if (role == -1|| role != 0) {
             JOptionPane.showMessageDialog(this,"Please select a valid role");
         }
-        
-        vaccineManufacturer.setUsername(username);
-        vaccineManufacturer.setPassword(password);
-        vaccineManufacturer.setName(brandName);
-        
-        populateTable();
-        
-        jTextField1.setText("");
-        jTextField2.setText("");
-        jTextField3.setText("");
+        if(username.isEmpty()||password.isEmpty()||companyName.isEmpty()){
+            
+            JOptionPane.showMessageDialog(this,"All fields are mandatory");
+
+            
+        }
+        else if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"Password is invalid");
+
+        }
+        else{
+            vaccineManufacturer.setUsername(username);
+            vaccineManufacturer.setPassword(password);
+            vaccineManufacturer.setName(companyName);
+
+            populateTable();
+
+            jTextField1.setText("");
+            jTextField2.setText("");
+            jTextField3.setText("");
+
+        }
+
+        if (role == -1|| role != 0) {
+            JOptionPane.showMessageDialog(this,"Please select a valid role");
+        }
+         
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        SystemAdminPanel systemAdmin = new SystemAdminPanel(splitPane, covidVaccinationSystem);
+        splitPane.setRightComponent(systemAdmin);
+
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void populateTable() {
 
@@ -305,6 +395,7 @@ public class VaccineManufacturerListPanel extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

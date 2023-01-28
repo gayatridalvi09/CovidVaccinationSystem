@@ -12,6 +12,7 @@ import UI.employee.NursePatientAppointmentAction;
 import UI.medicalcenter.MedicalCenterEmployeesPanel;
 import UI.covidcharity.CovidCharityDonorListPanel;
 import UI.city.CityAreaPanel;
+import javax.swing.JOptionPane;
 import model.users.CityAdmin;
 import model.users.CovidCharity;
 import model.config.DbConnector;
@@ -204,13 +205,28 @@ public class MainJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = usernameText.getText();
         String password = String.valueOf(passwordText.getPassword());
-        
-        if (username.equals("sys") && password.equals("sys")) {
+        if(username.isEmpty() || password.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter username or password");
+            return;
+
+        }
+        if (username.equals("admin") && password.equals("admin@1234")) {
             SystemAdminPanel systemAdminPanel = new SystemAdminPanel(jSplitPane1, covidVaccinationSystem);
             jSplitPane1.setRightComponent(systemAdminPanel);
-        } else {
-            checkLogins(username, password);
+        } 
+        else{
+            
+            int ans = checkLogins(username, password);
+            if(ans == 0){            
+                JOptionPane.showMessageDialog(this, "Invalid username or password");
+                return;
+
+                
+            }
+            
+
         }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -223,7 +239,8 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     
-    private void checkLogins(String username, String password) {
+    private int checkLogins(String username, String password) {
+        try{
         // Login for VaccineManufacturer
         for (VaccineManufacturer vaccineManufacturer: covidVaccinationSystem
                 .getVaccineManufacturerDirectory().getVaccineManufacturers()) {
@@ -232,6 +249,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 VaccinesPanel vaccinesPanel = new VaccinesPanel(
                         jSplitPane1, covidVaccinationSystem, vaccineManufacturer);
                 jSplitPane1.setRightComponent(vaccinesPanel);
+                return 1;
             }
         }
         // Login for Medical Center
@@ -241,6 +259,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 MedicalCenterEmployeesPanel medicalCenterEmployeesPanel = new MedicalCenterEmployeesPanel(
                         jSplitPane1, covidVaccinationSystem, medicalCenter);
                 jSplitPane1.setRightComponent(medicalCenterEmployeesPanel);
+                return 1;
             }
         }
 
@@ -251,6 +270,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 CovidCharityDonorListPanel covidCharityPanel = new CovidCharityDonorListPanel(
                         jSplitPane1, covidVaccinationSystem, covidCharity);
                 jSplitPane1.setRightComponent(covidCharityPanel);
+                return 1;
             }
         }
 
@@ -260,6 +280,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 CityAreaPanel communityPanel = new CityAreaPanel(
                         jSplitPane1, covidVaccinationSystem, communityAdmin);
                 jSplitPane1.setRightComponent(communityPanel);
+                return 1;
             }
         }
         
@@ -270,8 +291,9 @@ public class MainJFrame extends javax.swing.JFrame {
                     DonateFunds publicFund = new DonateFunds(
                             jSplitPane1, covidVaccinationSystem, publicDonor);
                     jSplitPane1.setRightComponent(publicFund);
+                    return 1;
                 }
-            }
+           }
         }
         
         for (MedicalCenter medicalCenter: covidVaccinationSystem.getMedicalCenterDirectory().getMedicalCenters()) {
@@ -282,14 +304,25 @@ public class MainJFrame extends javax.swing.JFrame {
                         NursePatientAppointmentAction nursePatientAppointmentAction = new NursePatientAppointmentAction(
                                 jSplitPane1, covidVaccinationSystem, employee, medicalCenter);
                         jSplitPane1.setRightComponent(nursePatientAppointmentAction);
+                        return 1;
                     } else {
                         ReceptionistPatientAppointmentPanel receptionistPatientAppointmentPanel = new ReceptionistPatientAppointmentPanel(
                                 jSplitPane1, covidVaccinationSystem, employee, medicalCenter);
                         jSplitPane1.setRightComponent(receptionistPatientAppointmentPanel);
+                        return 1;
                     }
                 }
+
             }
         }
+        }
+        catch(Exception  e){
+            JOptionPane.showMessageDialog(this, "Invalid order");
+            return -1;
+            
+        }
+        return 0;
+        
         
     }
     

@@ -50,55 +50,67 @@ public class SystemAdminPanel extends javax.swing.JPanel {
         btnCovidCharity = new javax.swing.JButton();
         btnVaccineProviderList = new javax.swing.JButton();
         btnMedCenterList = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitle.setText("System Admin");
 
+        tbnCommunityList.setBackground(new java.awt.Color(51, 204, 255));
         tbnCommunityList.setText("City Admin List");
+        tbnCommunityList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tbnCommunityList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tbnCommunityListActionPerformed(evt);
             }
         });
 
+        btnCovidCharity.setBackground(new java.awt.Color(51, 204, 255));
         btnCovidCharity.setText("Covid Charity Admin List");
+        btnCovidCharity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCovidCharity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCovidCharityActionPerformed(evt);
             }
         });
 
+        btnVaccineProviderList.setBackground(new java.awt.Color(51, 204, 255));
         btnVaccineProviderList.setText("Vaccine Provider List");
+        btnVaccineProviderList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnVaccineProviderList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVaccineProviderListActionPerformed(evt);
             }
         });
 
+        btnMedCenterList.setBackground(new java.awt.Color(51, 204, 255));
         btnMedCenterList.setText("Medical Center List");
+        btnMedCenterList.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnMedCenterList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMedCenterListActionPerformed(evt);
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sysadmin.jpg"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(390, Short.MAX_VALUE)
+                .addGap(243, 243, 243)
+                .addComponent(lblTitle)
+                .addContainerGap(575, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnVaccineProviderList)
-                            .addComponent(btnMedCenterList)
-                            .addComponent(tbnCommunityList, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCovidCharity))
-                        .addGap(337, 337, 337))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTitle)
-                        .addGap(373, 373, 373))))
+                    .addComponent(btnVaccineProviderList, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMedCenterList, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tbnCommunityList, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCovidCharity, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(90, 90, 90)
+                .addComponent(jLabel1)
+                .addGap(134, 134, 134))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnCovidCharity, btnMedCenterList, btnVaccineProviderList, tbnCommunityList});
@@ -106,17 +118,22 @@ public class SystemAdminPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(43, 43, 43)
                 .addComponent(lblTitle)
-                .addGap(53, 53, 53)
-                .addComponent(btnVaccineProviderList)
-                .addGap(35, 35, 35)
-                .addComponent(btnMedCenterList)
-                .addGap(31, 31, 31)
-                .addComponent(tbnCommunityList, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btnCovidCharity)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(btnVaccineProviderList)
+                        .addGap(35, 35, 35)
+                        .addComponent(btnMedCenterList)
+                        .addGap(31, 31, 31)
+                        .addComponent(tbnCommunityList, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnCovidCharity))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCovidCharity, btnMedCenterList, btnVaccineProviderList, tbnCommunityList});
@@ -125,7 +142,7 @@ public class SystemAdminPanel extends javax.swing.JPanel {
 
     private void tbnCommunityListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnCommunityListActionPerformed
         // TODO add your handling code here:
-        CityAdminPanel communityPanel = new CityAdminPanel(covidVaccinationSystem);
+        CityAdminPanel communityPanel = new CityAdminPanel(splitPane,covidVaccinationSystem);
         this.splitPane.setRightComponent(communityPanel);
 
 
@@ -134,7 +151,7 @@ public class SystemAdminPanel extends javax.swing.JPanel {
 
     private void btnMedCenterListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMedCenterListActionPerformed
         // TODO add your handling code here:
-        MedicalCenterListPanel medicalCenterPanel = new MedicalCenterListPanel(covidVaccinationSystem);
+        MedicalCenterListPanel medicalCenterPanel = new MedicalCenterListPanel(splitPane,covidVaccinationSystem);
         this.splitPane.setRightComponent(medicalCenterPanel);
 
 
@@ -142,13 +159,13 @@ public class SystemAdminPanel extends javax.swing.JPanel {
 
     private void btnVaccineProviderListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaccineProviderListActionPerformed
         // TODO add your handling code here:
-        VaccineManufacturerListPanel vaccinationManufacturerPanel = new VaccineManufacturerListPanel(covidVaccinationSystem);
+        VaccineManufacturerListPanel vaccinationManufacturerPanel = new VaccineManufacturerListPanel(splitPane,covidVaccinationSystem);
         this.splitPane.setRightComponent(vaccinationManufacturerPanel);
     }//GEN-LAST:event_btnVaccineProviderListActionPerformed
 
     private void btnCovidCharityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCovidCharityActionPerformed
         // TODO add your handling code here:
-        CovidCharityListPanel covidCharityPanel = new CovidCharityListPanel(covidVaccinationSystem);
+        CovidCharityListPanel covidCharityPanel = new CovidCharityListPanel(splitPane,covidVaccinationSystem);
         this.splitPane.setRightComponent(covidCharityPanel);
 
         
@@ -161,6 +178,7 @@ public class SystemAdminPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnCovidCharity;
     private javax.swing.JButton btnMedCenterList;
     private javax.swing.JButton btnVaccineProviderList;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JButton tbnCommunityList;
     // End of variables declaration//GEN-END:variables

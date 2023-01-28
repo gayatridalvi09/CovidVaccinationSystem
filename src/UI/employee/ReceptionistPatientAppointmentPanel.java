@@ -6,6 +6,8 @@ package UI.employee;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
@@ -254,8 +256,8 @@ public class ReceptionistPatientAppointmentPanel extends javax.swing.JPanel {
                                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 919, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1013, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,13 +303,8 @@ public class ReceptionistPatientAppointmentPanel extends javax.swing.JPanel {
         // TODO add your handling code here:String username = jTextField1.getText();
         String name = jTextField1.getText();
         String ageStr = jTextField2.getText();
-        int age = 0;
-        try {
-            age = Integer.parseInt(ageStr);
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(this,"Please enter correct age");
-            return;
-        }
+
+
         
         String gender = (String) jComboBox1.getSelectedItem();
         String email = jTextField4.getText();
@@ -318,13 +315,53 @@ public class ReceptionistPatientAppointmentPanel extends javax.swing.JPanel {
         // select nurse
         String nurseName = (String) jComboBox2.getSelectedItem();
         Employee nurseSelected = null;
+        if(name.isEmpty() || ageStr.isEmpty() || gender == null || email.isEmpty() || phone.isEmpty() || address.isEmpty()){
+          JOptionPane.showMessageDialog(this,"All fields are mandorty");
+            return; 
+        }
         
+        int age = 0;
+        try {
+            age = Integer.parseInt(ageStr);
+            if (age <= 0) {
+                JOptionPane.showMessageDialog(this, "Age cannot be negative or 0");
+                return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Age should be number");
+            return;
+        }
+        long phoneNumber = 0;
+        if (phone.length() != 10) {
+            JOptionPane.showMessageDialog(this, "Phone number should be 10 digits");
+            return;
+        }
+        try {
+            phoneNumber = Long.parseLong(phone);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid phone number");
+            return;
+        }
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);  
+        Matcher m = pattern.matcher(email);  
+        if(m.matches() == false){
+            JOptionPane.showMessageDialog(this,"email id is invalid");
+            return;
+
+        }
+
+
+
+
+
         for (Employee e: this.medicalCenter.getEmployeeDirectory().getEmployees()) {
             if (e.getName().equals(nurseName) && e.getRole().equals(Role.NURSE)) {
                 nurseSelected = e;
                 break;
             }
         }
+        
         
         if (nurseSelected == null) {
             JOptionPane.showMessageDialog(this,"Please enter valid covid charity");

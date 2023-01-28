@@ -38,11 +38,11 @@
 
 ### Roles
 + List of Roles
-    + System Admin,
+    + System Admin
     + Vaccine manufacturer
     + Nurse
     + Receptionist
-    + Medical center admin,
+    + Medical center admin
     + City admin
     + NGO head
     + Public donor

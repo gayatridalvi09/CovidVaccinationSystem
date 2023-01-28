@@ -89,7 +89,7 @@ public class RequestFundsPanel extends javax.swing.JPanel {
         jLabel2.setText("Description:");
 
         jLabel3.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel3.setText("Amount:");
+        jLabel3.setText("Amount($):");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);

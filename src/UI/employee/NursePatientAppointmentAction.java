@@ -4,6 +4,13 @@
  */
 package UI.employee;
 
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +21,11 @@ import model.users.Employee;
 import model.users.MedicalCenter;
 import model.workrequest.WorkRequest;
 import model.vaccinationsystem.CovidVaccinationSystem;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -57,6 +69,7 @@ public class NursePatientAppointmentAction extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(102, 153, 255));
 
@@ -85,6 +98,15 @@ public class NursePatientAppointmentAction extends javax.swing.JPanel {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 153, 255));
+        jButton2.setText("Anaylsis");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,6 +122,8 @@ public class NursePatientAppointmentAction extends javax.swing.JPanel {
                 .addContainerGap(194, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(232, 232, 232))
         );
@@ -111,7 +135,9 @@ public class NursePatientAppointmentAction extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(207, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -125,10 +151,43 @@ public class NursePatientAppointmentAction extends javax.swing.JPanel {
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Appointment appointment = (Appointment) model.getValueAt(selectedRowIndex, 0);
+        String vaccine = appointment.getVaccineBrand();
+        String name = appointment.getName();
+
         appointment.setStatus(WorkRequest.Status.VACCINATED);
+        SendMail(appointment.getEmailId(),vaccine,name);
+
 
         populateTable();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int countVaccinated  =0;
+        int notVaccinated =0 ;
+        for (Appointment track: this.medicalCenter.getAppointments()) {
+                if(track.getStatus().equals(WorkRequest.Status.VACCINATED)){
+                    countVaccinated++; 
+                }
+                else{
+                    notVaccinated++;
+                }
+                
+            }
+        DefaultPieDataset defaultPieDataset = new DefaultPieDataset();
+        defaultPieDataset.setValue("Pending Vaccinations", notVaccinated);
+        defaultPieDataset.setValue("Vaccinated patient", countVaccinated);
+
+        JFreeChart chart = ChartFactory.createPieChart("Patient Status Pie Chart", defaultPieDataset, true, true, true);
+        PiePlot piePlot =(PiePlot) chart.getPlot();
+        ChartFrame frame = new ChartFrame("Vaccination Pie Chart", chart);
+        frame.setVisible(true);
+        frame.setSize(500,500);
+
+        
+
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void populateTable() {
 
@@ -145,10 +204,44 @@ public class NursePatientAppointmentAction extends javax.swing.JPanel {
         }
         dbConnector.storeSystem(covidVaccinationSystem);
     }
+        private void SendMail(String toMail, String vaccine, String name) {
+        String to = toMail;
+        String from = "gdalvi9421@gmail.com";
+        String host = "smtp.gmail.com";
+        Properties properties = new Properties();
+
+        // Setup mail server
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.auth", "true");
+
+        Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                return new javax.mail.PasswordAuthentication("gdalvi9421@gmail.com", 
+                        "ejfyfdktjdmkrefb");
+            }
+        });
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.setSubject("Covid Vaccination");
+
+            message.setContent("<h4>"+"Hello "+name+","+"<br>"+"<h4>" + "Successfully Vaccinated" + "</h4>", "text/html");
+
+            Transport.send(message);
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
+    }
+
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;

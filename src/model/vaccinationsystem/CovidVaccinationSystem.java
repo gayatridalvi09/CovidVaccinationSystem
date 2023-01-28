@@ -6,12 +6,13 @@ package model.vaccinationsystem;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.users.CommunityAdmin;
+import model.users.CityAdmin;
 import model.directories.CommunityAdminDirectory;
 import model.users.CovidCharity;
 import model.directories.CovidCharityDirectory;
 import model.users.MedicalCenter;
 import model.directories.MedicalCenterDirectory;
+import model.directories.VaccineDirectory;
 import model.users.VaccineManufacturer;
 import model.directories.VaccineManufacturerDirectory;
 
@@ -33,6 +34,7 @@ public class CovidVaccinationSystem {
     private MedicalCenterDirectory medicalCenterDirectory;
     private CovidCharityDirectory covidCharityDirectory;
     private CommunityAdminDirectory communityDirectory;
+    private VaccineDirectory vaccineDirectory;
 
 
 
@@ -42,7 +44,16 @@ public class CovidVaccinationSystem {
         this.medicalCenterDirectory = new MedicalCenterDirectory(new ArrayList<>());
         this.covidCharityDirectory = new CovidCharityDirectory(new ArrayList<>());
         this.communityDirectory = new CommunityAdminDirectory(new ArrayList<>());
+        this.vaccineDirectory = new VaccineDirectory(new ArrayList<>());
 
+    }
+
+    public VaccineDirectory getVaccineDirectory() {
+        return vaccineDirectory;
+    }
+
+    public void setVaccineDirectory(VaccineDirectory vaccineDirectory) {
+        this.vaccineDirectory = vaccineDirectory;
     }
 
     public VaccineManufacturerDirectory getVaccineManufacturerDirectory() {

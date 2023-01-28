@@ -16,7 +16,7 @@ public enum Role {
     NGO_HEAD("Ngo Head"),
     PUBLIC_DONOR("Public Donor"),
     SYSTEM_ADMIN("System Admin"),
-    COMMUNITY_ADMIN("Community Admin");
+    CITY_ADMIN("City Admin");
     
     private final String name;
     

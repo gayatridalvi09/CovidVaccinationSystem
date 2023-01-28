@@ -22,7 +22,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace pref="369" max="32767" attributes="0"/>
+              <EmptySpace pref="412" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel1" min="-2" pref="248" max="-2" attributes="0"/>
@@ -122,7 +122,7 @@
               <Table columnCount="3" rowCount="4">
                 <Column editable="true" title="Brand Name" type="java.lang.Object"/>
                 <Column editable="true" title="Quantity" type="java.lang.Object"/>
-                <Column editable="true" title="Disbursement City" type="java.lang.Object"/>
+                <Column editable="true" title="Area" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -179,7 +179,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Serif" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Disbursement City:"/>
+        <Property name="text" type="java.lang.String" value=" Area :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBox1">

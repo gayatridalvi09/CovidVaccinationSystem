@@ -17,7 +17,7 @@ import model.vaccinationsystem.CovidVaccinationSystem;
  * @author gayat
  */
 public class DbConnector {
-    private static final String FILENAME = Paths.get("covid_system.db4o").toAbsolutePath().toString();
+    private static final String FILENAME = Paths.get("covid_system7.db4o").toAbsolutePath().toString();
     private static DbConnector dbConnector;
     
     public synchronized static DbConnector getInstance(){

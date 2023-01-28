@@ -4,19 +4,24 @@
  */
 package UI.vaccinemanufacturer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 import model.community.Community;
-import model.users.CommunityAdmin;
+import model.users.CityAdmin;
 import model.directories.CommunityAdminDirectory;
 import model.config.DbConnector;
+import model.directories.VaccineDirectory;
 import model.users.Employee;
 import model.users.VaccineManufacturer;
 import model.vaccinationsystem.CovidVaccinationSystem;
 import model.vaccine.Vaccine;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -79,7 +84,7 @@ public class VaccinesPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Brand Name", "Quantity", "Disbursement City"
+                "Brand Name", "Quantity", "Area"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -97,7 +102,7 @@ public class VaccinesPanel extends javax.swing.JPanel {
         jLabel3.setText("Quantity:");
 
         jLabel4.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel4.setText("Disbursement City:");
+        jLabel4.setText(" Area :");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item1" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -132,7 +137,7 @@ public class VaccinesPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(369, Short.MAX_VALUE)
+                .addContainerGap(412, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,7 +241,7 @@ public class VaccinesPanel extends javax.swing.JPanel {
         jComboBox1.removeAllItems();
         Set<String> cities = new HashSet<>();
         
-        for(CommunityAdmin cad : this.covidVaccinationSystem.getCommunityDirectory().getCommunities()){
+        for(CityAdmin cad : this.covidVaccinationSystem.getCommunityDirectory().getCommunities()){
             for (Community c : cad.getcommunityDirectory().getCommunities()) {
                 cities.add(c.getCity());
             }

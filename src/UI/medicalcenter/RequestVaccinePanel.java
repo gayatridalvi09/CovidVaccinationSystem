@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 import model.community.Community;
-import model.users.CommunityAdmin;
+import model.users.CityAdmin;
 import model.config.DbConnector;
 import model.users.Employee;
 import model.users.MedicalCenter;

@@ -11,8 +11,8 @@ import UI.employee.ReceptionistPatientAppointmentPanel;
 import UI.employee.NursePatientAppointmentAction;
 import UI.medicalcenter.MedicalCenterEmployeesPanel;
 import UI.covidcharity.CovidCharityDonorListPanel;
-import UI.community.CommunityPanel;
-import model.users.CommunityAdmin;
+import UI.city.CityAreaPanel;
+import model.users.CityAdmin;
 import model.users.CovidCharity;
 import model.config.DbConnector;
 import model.users.Employee;
@@ -59,6 +59,7 @@ public class MainJFrame extends javax.swing.JFrame {
         passwordText = new javax.swing.JPasswordField();
         loginBtnPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,13 +143,24 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setBackground(new java.awt.Color(0, 204, 0));
+        jButton3.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        jButton3.setText("Logout");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout loginBtnPanelLayout = new javax.swing.GroupLayout(loginBtnPanel);
         loginBtnPanel.setLayout(loginBtnPanelLayout);
         loginBtnPanelLayout.setHorizontalGroup(
             loginBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(loginBtnPanelLayout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(loginBtnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
         loginBtnPanelLayout.setVerticalGroup(
@@ -156,7 +168,9 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(loginBtnPanelLayout.createSequentialGroup()
                 .addGap(293, 293, 293)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(534, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(336, Short.MAX_VALUE))
         );
 
         jSplitPane1.setLeftComponent(loginBtnPanel);
@@ -174,7 +188,7 @@ public class MainJFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 790, Short.MAX_VALUE)
+                .addComponent(jSplitPane1)
                 .addGap(169, 169, 169))
         );
 
@@ -198,6 +212,15 @@ public class MainJFrame extends javax.swing.JFrame {
             checkLogins(username, password);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        jSplitPane1.setRightComponent(workAreaPanel);
+        usernameText.setText("");
+        passwordText.setText("");
+
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     
     private void checkLogins(String username, String password) {
@@ -231,10 +254,10 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         }
 
-        for (CommunityAdmin communityAdmin: covidVaccinationSystem.getCommunityDirectory().getCommunities()) {
+        for (CityAdmin communityAdmin: covidVaccinationSystem.getCommunityDirectory().getCommunities()) {
             if (communityAdmin.getUsername().equals(username) 
                     && communityAdmin.getPassword().equals(password)) {
-                CommunityPanel communityPanel = new CommunityPanel(
+                CityAreaPanel communityPanel = new CityAreaPanel(
                         jSplitPane1, covidVaccinationSystem, communityAdmin);
                 jSplitPane1.setRightComponent(communityPanel);
             }
@@ -308,6 +331,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

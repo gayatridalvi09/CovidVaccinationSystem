@@ -2,12 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.community;
+package UI.city;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.users.CommunityAdmin;
+import model.users.CityAdmin;
 import model.config.DbConnector;
 import model.role.Role;
 import model.vaccinationsystem.CovidVaccinationSystem;
@@ -16,7 +16,7 @@ import model.vaccinationsystem.CovidVaccinationSystem;
  *
  * @author gayat
  */
-public class CommunityAdminPanel extends javax.swing.JPanel {
+public class CityAdminPanel extends javax.swing.JPanel {
     private final CovidVaccinationSystem covidVaccinationSystem;
     private DbConnector dbConnector = DbConnector.getInstance();
 
@@ -24,7 +24,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
     /**
      * Creates new form CommunityAdminPanel
      */
-    public CommunityAdminPanel(CovidVaccinationSystem covidVaccinationSystem) {
+    public CityAdminPanel(CovidVaccinationSystem covidVaccinationSystem) {
         this.covidVaccinationSystem = covidVaccinationSystem;
 
         initComponents();
@@ -59,7 +59,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(102, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Serif", 1, 18)); // NOI18N
-        jLabel1.setText("Community Center Admin");
+        jLabel1.setText("City Center Admin");
 
         jLabel2.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jLabel2.setText("Username:");
@@ -75,7 +75,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
                 {null, null, null}
             },
             new String [] {
-                "Username", "Community Name", "Role"
+                "Username", "Name", "Role"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -105,9 +105,9 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
         });
 
         jLabel5.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
-        jLabel5.setText("Community Name:");
+        jLabel5.setText("Name:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Community Admin"}));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "City Admin"}));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -126,7 +126,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(132, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -207,9 +207,9 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        CommunityAdmin medicalCenter = (CommunityAdmin) model.getValueAt(selectedRowIndex, 0);
+        CityAdmin cityAdmin = (CityAdmin) model.getValueAt(selectedRowIndex, 0);
 
-        covidVaccinationSystem.getMedicalCenterDirectory().getMedicalCenters().remove(medicalCenter);
+        covidVaccinationSystem.getCommunityDirectory().getCommunities().remove(cityAdmin);
 
         populateTable();
         
@@ -224,7 +224,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        CommunityAdmin community = (CommunityAdmin) model.getValueAt(selectedRowIndex, 0);
+        CityAdmin community = (CityAdmin) model.getValueAt(selectedRowIndex, 0);
         jTextField1.setText(community.getUsername());
         jTextField2.setText(community.getPassword());
         jTextField4.setText(community.getName());
@@ -238,7 +238,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
         String hospitalName = jTextField4.getText();
         String role = jComboBox1.getSelectedItem().toString();
         System.out.println(role);
-            CommunityAdmin community = new CommunityAdmin(username, password, hospitalName, Role.COMMUNITY_ADMIN); // TODO Role
+            CityAdmin community = new CityAdmin(username, password, hospitalName, Role.CITY_ADMIN); // TODO Role
             covidVaccinationSystem.getCommunityDirectory().addCommunity(community);
 
         populateTable();
@@ -263,7 +263,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
             return;
         }
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        CommunityAdmin medicalCenter = (CommunityAdmin) model.getValueAt(selectedRowIndex, 0);
+        CityAdmin medicalCenter = (CityAdmin) model.getValueAt(selectedRowIndex, 0);
 
         // TODO: Add validations later
         String username = jTextField1.getText();
@@ -299,7 +299,7 @@ public class CommunityAdminPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        for (CommunityAdmin vm : this.covidVaccinationSystem.getCommunityDirectory().getCommunities()) {
+        for (CityAdmin vm : this.covidVaccinationSystem.getCommunityDirectory().getCommunities()) {
             Object[] row = new Object[3];
             row[0] = vm;                     
             row[1] = vm.getName();

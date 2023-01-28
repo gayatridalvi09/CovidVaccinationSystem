@@ -7,7 +7,7 @@ package UI.systemadmin;
 import UI.vaccinemanufacturer.VaccineManufacturerListPanel;
 import UI.medicalcenter.MedicalCenterListPanel;
 import UI.covidcharity.CovidCharityListPanel;
-import UI.community.CommunityAdminPanel;
+import UI.city.CityAdminPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JOptionPane;
 import model.config.DbConnector;
@@ -54,14 +54,14 @@ public class SystemAdminPanel extends javax.swing.JPanel {
         lblTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblTitle.setText("System Admin");
 
-        tbnCommunityList.setText("Community ");
+        tbnCommunityList.setText("City Admin List");
         tbnCommunityList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tbnCommunityListActionPerformed(evt);
             }
         });
 
-        btnCovidCharity.setText("Covid Charity");
+        btnCovidCharity.setText("Covid Charity Admin List");
         btnCovidCharity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCovidCharityActionPerformed(evt);
@@ -125,7 +125,7 @@ public class SystemAdminPanel extends javax.swing.JPanel {
 
     private void tbnCommunityListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnCommunityListActionPerformed
         // TODO add your handling code here:
-        CommunityAdminPanel communityPanel = new CommunityAdminPanel(covidVaccinationSystem);
+        CityAdminPanel communityPanel = new CityAdminPanel(covidVaccinationSystem);
         this.splitPane.setRightComponent(communityPanel);
 
 

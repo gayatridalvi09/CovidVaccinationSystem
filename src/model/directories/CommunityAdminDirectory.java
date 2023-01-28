@@ -4,7 +4,7 @@
  */
 package model.directories;
 
-import model.users.CommunityAdmin;
+import model.users.CityAdmin;
 import java.util.List;
 
 /**
@@ -12,21 +12,21 @@ import java.util.List;
  * @author gayat
  */
 public class CommunityAdminDirectory {
-    private List<CommunityAdmin> communities;
+    private List<CityAdmin> communities;
 
-    public CommunityAdminDirectory(List<CommunityAdmin> communities) {
+    public CommunityAdminDirectory(List<CityAdmin> communities) {
         this.communities = communities;
     }
 
-    public List<CommunityAdmin> getCommunities() {
+    public List<CityAdmin> getCommunities() {
         return communities;
     }
 
-    public void setCommunities(List<CommunityAdmin> communities) {
+    public void setCommunities(List<CityAdmin> communities) {
         this.communities = communities;
     }
     
-    public void addCommunity(CommunityAdmin community) {
+    public void addCommunity(CityAdmin community) {
         this.communities.add(community);
     }
 

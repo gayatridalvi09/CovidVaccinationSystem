@@ -13,10 +13,10 @@ import model.role.Role;
  *
  * @author gayat
  */
-public class CommunityAdmin extends User{
+public class CityAdmin extends User{
     private CommunityDirectory communityDirectory;
 
-    public CommunityAdmin(String username, String password, String name, Role role) {
+    public CityAdmin(String username, String password, String name, Role role) {
         super(username, password, name, role);
         this.communityDirectory = new CommunityDirectory(new ArrayList<>());
     }

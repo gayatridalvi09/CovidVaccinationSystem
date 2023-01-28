@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UI.community;
+package UI.city;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 import model.community.Community;
-import model.users.CommunityAdmin;
+import model.users.CityAdmin;
 import model.users.CovidCharity;
 import model.config.DbConnector;
 import model.role.Role;
@@ -19,18 +19,18 @@ import model.vaccinationsystem.CovidVaccinationSystem;
  *
  * @author gayat
  */
-public class CommunityPanel extends javax.swing.JPanel {
+public class CityAreaPanel extends javax.swing.JPanel {
     private final CovidVaccinationSystem covidVaccinationSystem;
     private javax.swing.JSplitPane splitPane;
-    private CommunityAdmin communityAdmin;
+    private CityAdmin communityAdmin;
     private DbConnector dbConnector = DbConnector.getInstance();
 
 
     /**
      * Creates new form CovidCharityPanel
      */
-    public CommunityPanel(JSplitPane splitPane,
-            CovidVaccinationSystem covidVaccinationSystem, CommunityAdmin communityAdmin) {
+    public CityAreaPanel(JSplitPane splitPane,
+            CovidVaccinationSystem covidVaccinationSystem, CityAdmin communityAdmin) {
        this.covidVaccinationSystem = covidVaccinationSystem;
        this.splitPane = splitPane;
        this.communityAdmin = communityAdmin;
@@ -62,7 +62,7 @@ public class CommunityPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Community Admin");
+        jLabel1.setText("City Area Panel");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,12 +72,13 @@ public class CommunityPanel extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "City", "Zip Code"
+                "Area Name", "Zip Code"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        lblCityName.setText("City Name :");
+        lblCityName.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
+        lblCityName.setText("Area Name:");
 
         txtCityName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +86,7 @@ public class CommunityPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Serif", 1, 14)); // NOI18N
         jLabel4.setText("Zip Code :");
 
         btnAddHouse.setText("Submit");
@@ -138,7 +140,7 @@ public class CommunityPanel extends javax.swing.JPanel {
                     .addComponent(txtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addComponent(btnAddHouse)
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

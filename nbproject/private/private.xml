@@ -3,11 +3,43 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/covidcharity/DonateFundsAction.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/vaccinemanufacturer/VaccinesPanel.java</file>
             <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/MainJFrame.java</file>
-            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/NursePatientAppointmentAction.java</file>
-            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/user/Appointment.java</file>
-            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/user/MedicalCenter.java</file>
-            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/ReceptionistPatientAppointmentPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/medicalcenter/MedicalCenterEmployeesPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/medicalcenter/RequestVaccinePanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/community/Community.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/workrequest/VaccineRequest.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/covidcharity/FundsAction.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/medicalcenter/MedicalCenterListPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/users/User.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/vaccinemanufacturer/VaccineManufacturerListPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/workrequest/WorkRequest.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/community/CommunityPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/publicdonor/DonateFunds.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/config/DbConnector.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/vaccinemanufacturer/VaccineAction.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/users/CovidCharity.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/directories/CommunityAdminDirectory.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/covidcharity/CovidCharityDonorListPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/community/CommunityAdminPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/medicalcenter/RequestFundsPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/workrequest/Appointment.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/users/VaccineManufacturer.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/users/Employee.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/directories/CommunityDirectory.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/covidcharity/CovidCharityListPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/employee/NursePatientAppointmentAction.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/employee/ReceptionistPatientAppointmentPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/users/CommunityAdmin.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/workrequest/Donation.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/users/MedicalCenter.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/UI/systemadmin/SystemAdminPanel.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/vaccinationsystem/CovidVaccinationSystem.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/users/PublicDonor.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/directories/VaccineDirectory.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/role/Role.java</file>
+            <file>file:/C:/Users/gayat/Documents/NetBeansProjects/CovidVaccinationSystem/src/model/workrequest/FundsRequest.java</file>
         </group>
     </open-files>
 </project-private>

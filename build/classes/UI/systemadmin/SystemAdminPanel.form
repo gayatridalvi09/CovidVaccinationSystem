@@ -65,7 +65,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="tbnCommunityList">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Community "/>
+        <Property name="text" type="java.lang.String" value="City Admin List"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbnCommunityListActionPerformed"/>
@@ -73,7 +73,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnCovidCharity">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Covid Charity"/>
+        <Property name="text" type="java.lang.String" value="Covid Charity Admin List"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCovidCharityActionPerformed"/>
